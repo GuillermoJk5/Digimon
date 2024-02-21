@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+        <div class="container">
+            <!-- Cabecera -->
+            <div class="row">
+                <div class="col">
+                    <h1>Título de la Cabecera</h1>
+                </div>
+                <div class="col filtro">   
+                    <!-- Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filtro
+                        </button>
+                        <ul class="dropdown-menu grande dropdown-menu-start" aria-labelledby="dropdownMenuButton">
+                            <li>
+                                <input id="filtronombre" type="text" class="form-control" placeholder="Nombre">
+                            </li>
+                            
+                            <li>
+                                <select  id="filtronivel"  class="form-select me-2" aria-label="Select">
+                                    <option selected>Nivel</option>
+                                    <option value="1">Opción 1</option>
+                                    <option value="2">Opción 2</option>
+                                    <option value="3">Opción 3</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  id="filtroatributo" class="form-select me-2" aria-label="Select">
+                                    <option selected>Atributo</option>
+                                    <option value="1">Opción 1</option>
+                                    <option value="2">Opción 2</option>
+                                    <option value="3">Opción 3</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  id="filtrotipo"  class="form-select me-2" aria-label="Select">
+                                    <option selected>Tipo</option>
+                                    <option value="1">Opción 1</option>
+                                    <option value="2">Opción 2</option>
+                                    <option value="3">Opción 3</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  id="filtrohabitat"  class="form-select me-2" aria-label="Select">
+                                    <option selected>Habitat</option>
+                                    <option value="1">Opción 1</option>
+                                    <option value="2">Opción 2</option>
+                                    <option value="3">Opción 3</option>
+                                </select>
+                            </li>
+                            
+                            <li>
+                                <button type="submit">Filtrar</button>
+                            </li>
+                        </form>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</body>
+</html>
