@@ -2,11 +2,11 @@
     "compilerOptions": {
       "target": "es2015",
       "module": "commonjs",
-      "outDir": "./dist",
+      "outDir": "./Controladores/js",
       "strict": true
     },
     "include": [
-      "src/**/*.ts"
+      "Controladores/**/*.ts"
     ],
     "exclude": [
       "node_modules"
