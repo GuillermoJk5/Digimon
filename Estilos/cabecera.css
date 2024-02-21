@@ -4,4 +4,13 @@ header {
     color: #eb682b; /* Color del texto */
     padding: 20px; /* Espaciado interno */
   }
-  
+.filtro{
+    justify-content: right;
+    display: flex;
+}
+li{
+    margin:5px
+}
+.grande {
+    min-width: 400px; /* Ajusta el tamaño del desplegable según sea necesario */
+}
