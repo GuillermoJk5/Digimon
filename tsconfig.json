@@ -3,11 +3,13 @@
       "target": "es2015",
       "module": "commonjs",
       "outDir": "./Controladores/js",
-      "strict": true
+      "strict": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true
     },
     "include": [
       "Controladores/**/*.ts"
-    ],
+, "Modelos/ts/CardGenerator.ts", "Modelos/Pagination.ts"    ],
     "exclude": [
       "node_modules"
     ]
