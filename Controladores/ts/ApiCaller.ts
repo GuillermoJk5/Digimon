@@ -5,7 +5,7 @@ export class ApiCaller {
     this.apiUrl = apiUrl;
   }
 
-  public fetchData(): Promise<any> {
+  public fetchData<T>(): Promise<T> {
     return new Promise((resolve, reject) => {
       $.ajax({
         url: this.apiUrl,
@@ -21,6 +21,7 @@ export class ApiCaller {
     });
   }
 }
+
     //LISTA DE DIGIMONS   digi-api.com/api/v1/digimon?pageSize=10       
     //                    digi-api.com/api/v1/digimon?xAntibody=false&pageSize=10
     //lista de habitats   digi-api.com/api/v1/field
