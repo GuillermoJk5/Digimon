@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center">
+            <h1 id="nombre">Título centrado</h1>
+            <img src="tu_imagen.jpg" class="img-fluid mt-4" alt="Imagen">
+          </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p id="level">Child</p>
+            </div>
+            <div class="col">
+                <p id="atributo">Child</p>
+            </div>
+            <div class="col">
+                <p id="tipo">Child</p>
+            </div>
+        </div>
+      </div>
+</body>
+<script>
+    // Función para obtener el valor de un parámetro de la URL
+    function obtenerParametroURL(nombreParametro) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(nombreParametro);
+    }
+
+    // Obtener el valor de 'id' de la URL
+    const idDigimon = obtenerParametroURL('id');
+    console.log('ID del Digimon:', idDigimon);
+
+    mostrardatos(idDigimon);
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>
