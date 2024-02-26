@@ -1,14 +1,9 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const ApiCaller_1 = require("./ApiCaller");
-const Fields_1 = require("../Modelos/Fields");
-const Digimon_1 = require("../Modelos/Digimon");
-const Digi_1 = require("../Modelos/Digi");
 function mostrarDatos(id) {
     // URL de la API con el ID insertado
     const apiUrl = `https://digi-api.com/api/v1/digimon/${id}`;
     // Crear una instancia de ApiCaller
-    const apiCaller = new ApiCaller_1.ApiCaller(apiUrl);
+    const apiCaller = new ApiCaller(apiUrl);
     // Llamar al método fetchData
     apiCaller.fetchData()
         .then((data) => {
@@ -20,17 +15,17 @@ function mostrarDatos(id) {
         const type = data.types[0].type;
         const attribute = data.attributes[0].attribute;
         const fields = data.fields.map((next) => {
-            return new Fields_1.Fields(next.field, next.image);
+            return new Fields(next.field, next.image);
         });
         const descripcion = data.descriptions[0].description;
         const skills = data.skills.map((skill) => skill.skill);
         const preEvolutions = data.priorEvolutions.map((prior) => {
-            return new Digi_1.Digi(prior.digimon, prior.image, prior.condition);
+            return new Digi(prior.digimon, prior.image, prior.condition);
         });
         const nextEvolutions = data.nextEvolutions.map((next) => {
-            return new Digi_1.Digi(next.digimon, next.image, next.condition);
+            return new Digi(next.digimon, next.image, next.condition);
         });
-        let digimonactual = new Digimon_1.Digimon(id, nombre, xAntibody, imagen, level, type, attribute, fields, descripcion, skills, preEvolutions, nextEvolutions);
+        let digimonactual = new Digimon(id, nombre, xAntibody, imagen, level, type, attribute, fields, descripcion, skills, preEvolutions, nextEvolutions);
         pintarDatos(digimonactual);
     })
         .catch((error) => {

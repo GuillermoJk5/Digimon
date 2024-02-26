@@ -1,4 +1,4 @@
-export class ApiCaller {
+ class ApiCaller {
   private apiUrl: string;
 
   constructor(apiUrl: string) {

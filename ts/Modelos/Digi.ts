@@ -1,4 +1,4 @@
-export class Digi {
+ class Digi {
   
     nombre: string;
     imagen: string;

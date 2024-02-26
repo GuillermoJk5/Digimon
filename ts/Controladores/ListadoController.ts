@@ -1,5 +1,4 @@
-import { ApiCaller } from './ApiCaller';
-import { Digimon } from '../Modelos/Digimon';
+
 
 // URL de la API
 const apiUrl = 'https://digi-api.com/api/v1/digimon?pageSize=10&xAntibody=false'; // URL de la API proporcionada

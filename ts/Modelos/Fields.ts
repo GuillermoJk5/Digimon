@@ -1,4 +1,4 @@
-export class Fields {
+ class Fields {
     nombre: string;
     imagen: string;
 

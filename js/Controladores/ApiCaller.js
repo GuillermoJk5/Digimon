@@ -1,6 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ApiCaller = void 0;
 class ApiCaller {
     constructor(apiUrl) {
         this.apiUrl = apiUrl;
@@ -21,7 +19,6 @@ class ApiCaller {
         });
     }
 }
-exports.ApiCaller = ApiCaller;
 //LISTA DE DIGIMONS   digi-api.com/api/v1/digimon?pageSize=10       
 //                    digi-api.com/api/v1/digimon?xAntibody=false&pageSize=10
 //lista de habitats   digi-api.com/api/v1/field

@@ -1,10 +1,8 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const ApiCaller_1 = require("./ApiCaller");
 // URL de la API
 const apiUrl = 'https://digi-api.com/api/v1/digimon?pageSize=10&xAntibody=false'; // URL de la API proporcionada
 // Crear una instancia de ApiCaller
-const apiCaller = new ApiCaller_1.ApiCaller(apiUrl);
+const apiCaller = new ApiCaller(apiUrl);
 // Llamar al método fetchData
 apiCaller.fetchData()
     .then((data) => {

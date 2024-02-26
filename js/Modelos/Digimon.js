@@ -1,6 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Digimon = void 0;
 class Digimon {
     constructor(id, name, xAntibody, imagen, level, type, attribute, fields, descriptions, skills, priorEvolutions, nextEvolutions) {
         this.id = id;
@@ -17,5 +15,4 @@ class Digimon {
         this.nextEvolutions = nextEvolutions;
     }
 }
-exports.Digimon = Digimon;
 //# sourceMappingURL=Digimon.js.map

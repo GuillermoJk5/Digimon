@@ -1,6 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Digi = void 0;
 class Digi {
     constructor(nombre, imagen, condicion) {
         this.nombre = nombre;
@@ -8,5 +6,4 @@ class Digi {
         this.condicion = condicion;
     }
 }
-exports.Digi = Digi;
 //# sourceMappingURL=Digi.js.map

@@ -1,8 +1,3 @@
-import { ApiCaller } from './ApiCaller';
-import { Fields } from '../Modelos/Fields';
-import { Digimon } from '../Modelos/Digimon';
-import { Digi } from '../Modelos/Digi';
-
 
 function mostrarDatos(id: number) {
     // URL de la API con el ID insertado

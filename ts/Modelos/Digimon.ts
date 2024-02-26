@@ -1,7 +1,5 @@
-import { Fields } from './Fields';
-import { Digi } from './Digi';
 
-export class Digimon {
+ class Digimon {
     id: number;
     name: string;
     xAntibody: boolean;
