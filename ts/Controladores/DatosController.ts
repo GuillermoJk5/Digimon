@@ -35,6 +35,8 @@ function mostrarDatos(id: number) {
   
        let digimonactual = new Digimon(id,nombre,xAntibody,imagen,level,type,attribute,fields,descripcion,skills,preEvolutions,nextEvolutions);
 
+      pintarDatos(digimonactual);
+
       })
       .catch((error: any) => {
         // Manejar el error si la llamada falla
@@ -43,7 +45,12 @@ function mostrarDatos(id: number) {
 
 
 
-      function pintardatos(digimonactual){
-      
-      }
+      function pintarDatos(digimon: Digimon) {
+        const contenedor = $("#contenedor");
+        contenedor.find('#nombre').text(digimon.name); 
+        contenedor.find('#imagen').attr('src', digimon.imagen); 
+        contenedor.find('#level').text(digimon.level); 
+        contenedor.find('#atributo').text(digimon.attribute); 
+        contenedor.find('#tipo').text(digimon.type); 
+    }
   }
