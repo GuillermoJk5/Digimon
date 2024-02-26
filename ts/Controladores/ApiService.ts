@@ -1,31 +1,51 @@
+// function CargarDigimon(pagina: number) {
+//     const apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=10&xAntibody=false&page=${pagina}`;
+//     // Crear una instancia de ApiCaller
+//     const apiCaller = new ApiCaller(apiUrl);
+
+//     // Llamar al método fetchData
+//     apiCaller.fetchData()
+//         .then((data: any) => {
+//             const digimoncards = [];
+//             console.log(data.content);
+//             for (const item of data.content) {
+//                 let imagen = item.image.replace(/^"(.*)"$/, '$1');
+//                 let digimon = new Card(item.id, item.name, imagen);
+//                 digimoncards.push(digimon);
+//             }
+
+//             // Guardar el array digimoncards en localStorage
+//             localStorage.setItem('digimoncards', JSON.stringify(digimoncards));
+//         })
+//         .catch((error: any) => {
+//             // Manejar el error si la llamada falla
+//             console.error('Error occurred:', error);
+//         });
+// }
+
 function CargarDigimon(pagina: number) {
-    const apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=10&xAntibody=false&page=${pagina}`;
-    // Crear una instancia de ApiCaller
-    const apiCaller = new ApiCaller(apiUrl);
+    let apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=${pagina}`;
+    
+    const filtros = JSON.parse(localStorage.getItem('filtros') || '[]');
 
-    // Llamar al método fetchData
-    apiCaller.fetchData()
-        .then((data: any) => {
-            const digimoncards = [];
-            console.log(data.content);
-            for (const item of data.content) {
-                let imagen = item.image.replace(/^"(.*)"$/, '$1');
-                let digimon = new Card(item.id, item.name, imagen);
-                digimoncards.push(digimon);
-            }
+if(filtros!=="[]"&&filtros!==undefined){
 
-            // Guardar el array digimoncards en localStorage
-            localStorage.setItem('digimoncards', JSON.stringify(digimoncards));
-        })
-        .catch((error: any) => {
-            // Manejar el error si la llamada falla
-            console.error('Error occurred:', error);
-        });
+    if(filtros.nombre!== undefined){
+        apiUrl = apiUrl + "&name="+filtros.nombre;
+    }
+    if(filtros.tipo!==undefined){
+        apiUrl = apiUrl + "&type="+filtros.tipo;
+    }
+    if(filtros.atributo!==undefined){
+        apiUrl = apiUrl + "&attribute="+filtros.atributo;
+    }
+    if(filtros.nivel!==undefined){
+        apiUrl = apiUrl + "&level="+filtros.nivel;
+    }
+    if(filtros.habitat!==undefined){
+        apiUrl = apiUrl + "&field="+filtros.habitat;
+    }
 }
-
-function CargarDigimonFiltro(pagina: number,nombre:string,tipo:string,atributo:string,habitat:string,nivel:string) {
-    const apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=10&xAntibody=false&page=${pagina}`;
-    // Crear una instancia de ApiCaller
     const apiCaller = new ApiCaller(apiUrl);
 
     // Llamar al método fetchData
@@ -35,6 +55,7 @@ function CargarDigimonFiltro(pagina: number,nombre:string,tipo:string,atributo:s
             console.log(data.content);
             for (const item of data.content) {
                 let imagen = item.image.replace(/^"(.*)"$/, '$1');
+                console.log(item.name);
                 let digimon = new Card(item.id, item.name, imagen);
                 digimoncards.push(digimon);
             }

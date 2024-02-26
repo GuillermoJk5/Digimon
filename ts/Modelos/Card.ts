@@ -3,7 +3,7 @@ class Card {
     nombre: string;
     imagen: string;
 
-    constructor( nombre: string, imagen: string,id : number) {
+    constructor( id : number, nombre: string,imagen: string) {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;

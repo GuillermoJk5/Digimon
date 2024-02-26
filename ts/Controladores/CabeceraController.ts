@@ -39,14 +39,32 @@ function rellenarSelect(select: string) {
    
 }
 
+function quitarfiltro(){
+    localStorage.removeItem('filtros');
+}
 
 function filtrar(){
-    let nombre = $("#filtronombre").val(); 
-    let nivel = $("#filtronivel").val();
-    let atributo = $("#filtroatributo").val(); 
-    let tipo = $("#filtrotipo").val();
-    let habitat = $("#filtrohabitat").val();
 
-    CargarDigimonFiltro(0,nombre,nivel,atributo,habitat,nivel);
+    function obtenerValorComoString(valor: any): string | undefined {
+        return typeof valor === 'string' ? valor : undefined;
+    }
+    
+    let nombre = obtenerValorComoString($("#filtronombre").val());
+    let nivel = obtenerValorComoString($("#filtronivel").val());
+    let atributo = obtenerValorComoString($("#filtroatributo").val());
+    let tipo = obtenerValorComoString($("#filtrotipo").val());
+    let habitat = obtenerValorComoString($("#filtrohabitat").val());
+
+   let filtros = {
+        nombre : nombre,
+        nivel: nivel,
+        atributo : atributo,
+        tipo : tipo,
+        habitat :habitat
+    }
+
+    localStorage.setItem('filtros', JSON.stringify(filtros));
+
+    CargarDigimon(0);
 
 }
