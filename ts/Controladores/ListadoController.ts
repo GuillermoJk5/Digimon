@@ -1,4 +1,5 @@
 import { ApiCaller } from './ApiCaller';
+import { Digimon } from '../Modelos/Digimon';
 
 // URL de la API
 const apiUrl = 'https://digi-api.com/api/v1/digimon?pageSize=10&xAntibody=false'; // URL de la API proporcionada
@@ -14,37 +15,21 @@ apiCaller.fetchData()
     for (const item of data) {
       digimonarray.push(item);
     }
-
-    pintarlista(digimonarray);
+    digimonarray.forEach(digimon => {
+   pintarlista(digimon);
+});
+   
   })
   .catch((error: any) => {
     // Manejar el error si la llamada falla
     console.error('Error occurred:', error);
   });
 
-function pintarlista(digimonarray: Array<any>): void {
-  const digimonContainer = document.getElementById('digimonContainer');
-  if (!digimonContainer) {
-    console.error('No se encontró el contenedor de digimon.');
-    return;
-  }
-
-  let html = '';
-
-  digimonarray.forEach(digimon => {
-    html += `
-      <div class="col">
-        <div class="card">
-            <a href="Datos.html?id=${digimon.id}">
-                <img src="${digimon.image}" class="card-img-top" alt="${digimon.name}">
-                <div class="card-body">
-                    <h5 class="card-title">${digimon.name}</h5>
-                </div>
-            </a>
-        </div>
-      </div>
-    `;
-  });
-
-  digimonContainer.innerHTML = html;
+  function pintarlista(digimon: Digimon) {
+    const listado = $("#lista");
+    let copia = $("#cartica").clone(true, true); // Clonar el div #cartica
+    copia.removeAttr('id'); // Eliminar el atributo id de la copia
+    copia.find('.card-title').text(digimon.name); // Cambiar el texto
+    copia.find('.card-img-top').attr('src', digimon.imagen); // Cambiar la imagen
+    copia.appendTo(listado).show(); // Agregar la copia al contenedor deseado y mostrarla
 }
