@@ -1,8 +1,8 @@
 /* Estilos para el header */
 header {
-    background-color: #2ec9b4; /* Color de fondo del header */
-    color: #eb682b; /* Color del texto */
-    padding: 20px; /* Espaciado interno */
+    background-color: #078CDB; 
+    color: #FE8014; 
+    padding: 20px; 
   }
 .filtro{
     justify-content: right;
@@ -13,5 +13,5 @@ li{
     margin:5px
 }
 .grande {
-    min-width: 400px; /* Ajusta el tamaño del desplegable según sea necesario */
+    min-width: 400px; 
 }

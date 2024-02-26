@@ -2,14 +2,15 @@
     "compilerOptions": {
       "target": "es2015",
       "module": "commonjs",
-      "outDir": "./Controladores/js",
+      "outDir": "./js",
       "strict": true,
       "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true
+      "allowSyntheticDefaultImports": true,
+      "sourceMap": true
     },
     "include": [
-      "Controladores/**/*.ts"
-, "Modelos/ts/CardGenerator.ts", "Modelos/Pagination.ts"    ],
+      "ts/**/*.ts"
+    ],
     "exclude": [
       "node_modules"
     ]

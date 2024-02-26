@@ -1,7 +1,7 @@
 import { ApiCaller } from './ApiCaller';
-import { Fields } from './../../Modelos/ts/Fields';
-import { Digimon } from './../../Modelos/ts/Digimon';
-import { Digi } from './../../Modelos/ts/Digi';
+import { Fields } from '../Modelos/Fields';
+import { Digimon } from '../Modelos/Digimon';
+import { Digi } from '../Modelos/Digi';
 
 
 function mostrarDatos(id: number) {
