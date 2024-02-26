@@ -1,4 +1,5 @@
 import { Fields } from './Fields';
+import { Digi } from './Digi';
 
 export class Digimon {
     id: number;

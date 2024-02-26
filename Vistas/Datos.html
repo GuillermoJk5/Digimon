@@ -7,6 +7,16 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
+
+<script src="../js/Modelos/Digi.js"></script>
+<script src="../js/Modelos/Fields.js"></script>
+<script src="../js/Modelos/Digimon.js"></script>
+<script src="../js/Controladores/DatosController.js"></script>
+<script src="../js/Controladores/ApiCaller.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<header id="cabecera"></header>
 <body>
     <div class="container" id="contenedor" >
         <div class="row justify-content-center">
@@ -29,6 +39,13 @@
       </div>
 </body>
 <script>
+
+
+$(document).ready(function(){
+    
+    $('#cabecera').load('Cabecera.html');
+});
+
     // Función para obtener el valor de un parámetro de la URL
     function obtenerParametroURL(nombreParametro) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -41,8 +58,6 @@
 
     mostrardatos(idDigimon);
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </html>

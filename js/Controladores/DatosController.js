@@ -31,12 +31,19 @@ function mostrarDatos(id) {
             return new Digi_1.Digi(next.digimon, next.image, next.condition);
         });
         let digimonactual = new Digimon_1.Digimon(id, nombre, xAntibody, imagen, level, type, attribute, fields, descripcion, skills, preEvolutions, nextEvolutions);
+        pintarDatos(digimonactual);
     })
         .catch((error) => {
         // Manejar el error si la llamada falla
         console.error('Error occurred:', error);
     });
-    function pintardatos(digimonactual) {
+    function pintarDatos(digimon) {
+        const contenedor = $("#contenedor");
+        contenedor.find('#nombre').text(digimon.name);
+        contenedor.find('#imagen').attr('src', digimon.imagen);
+        contenedor.find('#level').text(digimon.level);
+        contenedor.find('#atributo').text(digimon.attribute);
+        contenedor.find('#tipo').text(digimon.type);
     }
 }
 //# sourceMappingURL=DatosController.js.map
