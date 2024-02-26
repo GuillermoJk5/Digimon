@@ -1,0 +1,1 @@
+{"version":3,"file":"Card.js","sourceRoot":"","sources":["../../ts/Modelos/Card.ts"],"names":[],"mappings":";AAAA,MAAM,IAAI;IAKN,YAAa,MAAc,EAAE,MAAc,EAAC,EAAW;QACnD,IAAI,CAAC,EAAE,GAAG,EAAE,CAAC;QACb,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC;QACrB,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC;IAEzB,CAAC;CACJ"}

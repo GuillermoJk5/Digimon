@@ -1,24 +1,11 @@
 "use strict";
-// URL de la API
-const apiUrl = 'https://digi-api.com/api/v1/digimon?pageSize=10&xAntibody=false'; // URL de la API proporcionada
-// Crear una instancia de ApiCaller
-const apiCaller = new ApiCaller(apiUrl);
-// Llamar al método fetchData
-apiCaller.fetchData()
-    .then((data) => {
-    const digimonarray = [];
-    for (const item of data) {
-        digimonarray.push(item);
-    }
-    digimonarray.forEach(digimon => {
-        pintarlista(digimon);
-    });
-})
-    .catch((error) => {
-    // Manejar el error si la llamada falla
-    console.error('Error occurred:', error);
-});
+function mostrarpagina(pagina) {
+    //OBtener filtro
+    //mandar url get
+}
 function pintarlista(digimon) {
+    console.log(digimon.imagen);
+    console.log(digimon.name);
     const listado = $("#lista");
     let copia = $("#cartica").clone(true, true); // Clonar el div #cartica
     copia.removeAttr('id'); // Eliminar el atributo id de la copia
