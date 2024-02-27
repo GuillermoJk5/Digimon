@@ -110,7 +110,13 @@ const attributes = (data.attributes && data.attributes.length > 0) ? data.attrib
 const fields: Fields[] = (data.fields && data.fields.length > 0) ? data.fields.map((next: any) => {
   return new Fields(next.field, next.image);
 }) : [new Fields(predeterminado[0], predeterminado[0])];
-const descripcion = (data.descriptions && data.descriptions.length > 0) ? data.descriptions[0].description : predeterminado;
+const descripcion = (data.descriptions && data.descriptions.length > 0) ? 
+    data.descriptions.map((descripcion:any) => {
+        if (descripcion.language === "en_us") {
+            return descripcion.description;
+        }
+    }).filter(Boolean)[0] // Filter out undefined values and get the first one
+    : predeterminado;
 const skills:Skill[] = (data.skills && data.skills.length > 0) ? data.skills.map((skill: any) => {
   return new Skill(skill.skill,skill.description);
 }) : [new Skill(predeterminado[0],predeterminado[0])];

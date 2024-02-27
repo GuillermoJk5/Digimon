@@ -86,7 +86,13 @@ function generardigimon(data) {
     const fields = (data.fields && data.fields.length > 0) ? data.fields.map((next) => {
         return new Fields(next.field, next.image);
     }) : [new Fields(predeterminado[0], predeterminado[0])];
-    const descripcion = (data.descriptions && data.descriptions.length > 0) ? data.descriptions[0].description : predeterminado;
+    const descripcion = (data.descriptions && data.descriptions.length > 0) ?
+        data.descriptions.map((descripcion) => {
+            if (descripcion.language === "en_us") {
+                return descripcion.description;
+            }
+        }).filter(Boolean)[0] // Filter out undefined values and get the first one
+        : predeterminado;
     const skills = (data.skills && data.skills.length > 0) ? data.skills.map((skill) => {
         return new Skill(skill.skill, skill.description);
     }) : [new Skill(predeterminado[0], predeterminado[0])];
