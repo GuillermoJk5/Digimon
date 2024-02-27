@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-
 function rellenarSelect(select: string) {
     const levels = $(select);
     let nombrelista="";
@@ -37,8 +36,6 @@ function rellenarSelect(select: string) {
         console.log(element.name);
         levels.append('<option value="' + element.id + '">' + element.name + '</option>');
     });
-   
-   
    
 }
 
