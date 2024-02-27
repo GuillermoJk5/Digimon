@@ -51,6 +51,7 @@ function pintarDatos(digimon: Digimon) {
   // Cambiar el texto del atributo del Digimon
   const atributes = digimon.attribute.join('/');
   contenedor.find('#atributo').text(atributes); 
+  contenedor.find('#tipo').text(digimon.type); 
 
   // Pintar los campos del Digimon
   const fieldrow=contenedor.find("#fieldsrow");
@@ -150,7 +151,9 @@ function generardigimon(data:any){
   nextEvolutions.sort((a, b) => a.nombre.localeCompare(b.nombre));
   // Crear y retornar un objeto Digimon con los datos obtenidos
   let digimonactual = new Digimon(id,nombre,xAntibody,imagen,level2,type,atribute2,fields,descripcion,skills,preEvolutions,nextEvolutions);
-  return digimonactual;
+   console.log(digimonactual);
+   return digimonactual;
+ 
 }
 
 // Obtener el parámetro 'id' de la URL
