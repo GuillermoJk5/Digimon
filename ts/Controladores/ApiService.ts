@@ -36,7 +36,9 @@ function CargarDigimon(pagina: number) {
                 let imagen = item.image.replace(/^"(.*)"$/, '$1');
                 let digimon = new Card(item.id, item.name, imagen);
                 digimoncards.push(digimon);
+                
             }
+            console.log(digimoncards);
             // Guardar el array digimoncards en localStorage
             localStorage.setItem('digimoncards', JSON.stringify(digimoncards));
         })

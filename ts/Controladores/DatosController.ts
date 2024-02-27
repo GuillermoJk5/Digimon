@@ -78,7 +78,7 @@ function pintarDatos(digimon: Digimon) {
   digimon.priorEvolutions.forEach(prior => {
       let pre = $("#pre").clone(true, true);
       pre.find("#prenombre").text(prior.nombre);
-      pre.find("#precondicion").text(prior.condicion);
+      // pre.find("#precondicion").text(prior.condicion);
       pre.find("#preimg").attr('src', prior.imagen);
       pre.appendTo(prelista).show();
   });
@@ -88,7 +88,7 @@ function pintarDatos(digimon: Digimon) {
   digimon.nextEvolutions.forEach(nexto => {
       let next = $("#next").clone(true, true);
       next.find("#nextnombre").text(nexto.nombre);
-      next.find("#nextcondicion").text(nexto.condicion);
+      // next.find("#nextcondicion").text(nexto.condicion);
       next.find("#nextimg").attr('src', nexto.imagen);
       next.appendTo(nextlista).show();
   });
@@ -145,6 +145,9 @@ function generardigimon(data:any){
   } else {
       atribute2=attributes;
   }
+ // Ordenar las evoluciones por nombre del Digimon
+  preEvolutions.sort((a, b) => a.nombre.localeCompare(b.nombre));
+  nextEvolutions.sort((a, b) => a.nombre.localeCompare(b.nombre));
   // Crear y retornar un objeto Digimon con los datos obtenidos
   let digimonactual = new Digimon(id,nombre,xAntibody,imagen,level2,type,atribute2,fields,descripcion,skills,preEvolutions,nextEvolutions);
   return digimonactual;

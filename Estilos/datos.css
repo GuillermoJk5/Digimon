@@ -3,8 +3,30 @@ body{
 }
 .habilidades{
     text-align: left;
+    margin-bottom: 90px;
+    margin-top: 50px;
 }
 .imglista{
     height: auto;
     width: 200px;
+}
+h1{
+    margin-top: 10px;  
+}
+.nombevos{
+    align-items: center;
+    display: flex;
+}
+.habilidad{
+    display: flex;
+    flex-direction: row;
+}
+.tabla{
+    background-color: aqua;
+    border-bottom: 1px solid black;
+}
+.habilidadnombre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

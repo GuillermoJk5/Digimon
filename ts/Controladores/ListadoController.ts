@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (digimoncardsString !== null) {
       digimondcardslist = JSON.parse(digimoncardsString);
-    
+      console.log(digimondcardslist);
       digimondcardslist.forEach((digimon: Card) => {
       console.log(pagina);
       pintarlista(digimon);
