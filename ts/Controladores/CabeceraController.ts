@@ -1,10 +1,11 @@
 
 
 document.addEventListener('DOMContentLoaded', function() {
-rellenarSelect("filtronivel");
-rellenarSelect("filtroatributo");
-rellenarSelect("filtrotipo");
-rellenarSelect("filtrohabitat");
+// rellenarSelect("filtronivel");
+// rellenarSelect("filtroatributo");
+// rellenarSelect("filtrotipo");
+// rellenarSelect("filtrohabitat");
+
 });
 
 
@@ -15,6 +16,7 @@ function rellenarSelect(select: string) {
     switch (select) {
         case "filtronivel":
             nombrelista="listalevels";
+            console.log("nivel");
             break;
                 case "filtroatributo":
                     nombrelista="listaatributos";
@@ -29,9 +31,10 @@ function rellenarSelect(select: string) {
         default:
             break;
     } 
-    const lista = JSON.parse(localStorage.getItem(nombrelista) || '[]');
+    let lista = JSON.parse(localStorage.getItem(nombrelista) || '[]');
     
     lista.forEach((element : Dato) => {
+        console.log(element.name);
         levels.append('<option value="' + element.id + '">' + element.name + '</option>');
     });
    

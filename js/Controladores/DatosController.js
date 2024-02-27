@@ -7,38 +7,72 @@ function mostrarDatos(id) {
     // Llamar al método fetchData
     apiCaller.fetchData()
         .then((data) => {
-        const id = data.id;
-        const nombre = data.name;
-        const xAntibody = data.xAntibody;
-        const imagen = data.images[0].href;
-        const level = data.levels[0].level;
-        const type = data.types[0].type;
-        const attribute = data.attributes[0].attribute;
-        const fields = data.fields.map((next) => {
-            return new Fields(next.field, next.image);
-        });
-        const descripcion = data.descriptions[0].description;
-        const skills = data.skills.map((skill) => skill.skill);
-        const preEvolutions = data.priorEvolutions.map((prior) => {
-            return new Digi(prior.digimon, prior.image, prior.condition);
-        });
-        const nextEvolutions = data.nextEvolutions.map((next) => {
-            return new Digi(next.digimon, next.image, next.condition);
-        });
-        let digimonactual = new Digimon(id, nombre, xAntibody, imagen, level, type, attribute, fields, descripcion, skills, preEvolutions, nextEvolutions);
+        let digimonactual = generardigimon(data);
         pintarDatos(digimonactual);
     })
         .catch((error) => {
         // Manejar el error si la llamada falla
         console.error('Error occurred:', error);
     });
-    function pintarDatos(digimon) {
-        const contenedor = $("#contenedor");
-        contenedor.find('#nombre').text(digimon.name);
-        contenedor.find('#imagen').attr('src', digimon.imagen);
-        contenedor.find('#level').text(digimon.level);
-        contenedor.find('#atributo').text(digimon.attribute);
-        contenedor.find('#tipo').text(digimon.type);
+}
+function rescatarparametro() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    // Verificar si se proporcionó un ID en la URL
+    if (id) {
+        return id;
     }
+    else {
+        console.log('No se proporcionó ningún ID en la URL');
+    }
+}
+const parametro = rescatarparametro();
+if (typeof parametro === 'string') {
+    mostrarDatos(parametro);
+}
+function pintarDatos(digimon) {
+    let contenedor = $("#contenedor").clone(true, true);
+    const body = $('body');
+    contenedor.remove('id');
+    contenedor.find('#nombre').text(digimon.name);
+    contenedor.find('#imagen').attr('src', digimon.imagen);
+    const levels = digimon.level.join('/');
+    contenedor.find('#level').text(levels);
+    const atributes = digimon.attribute.join('/');
+    contenedor.find('#atributo').text(atributes);
+    contenedor.find('#tipo').text(digimon.type);
+    contenedor.appendTo(body).show();
+}
+function generardigimon(data) {
+    const predeterminado = "Sin Datos"; // Establecer el valor predeterminado aquí
+    const id = data.id || predeterminado;
+    const nombre = data.name || predeterminado;
+    const xAntibody = data.xAntibody || predeterminado;
+    const imagen = (data.images && data.images.length > 0) ? data.images[0].href : predeterminado;
+    const levels = (data.levels && data.levels.length > 0) ? data.levels : predeterminado;
+    const type = (data.types && data.types.length > 0) ? data.types[0].type : predeterminado;
+    const attributes = (data.attributes && data.attributes.length > 0) ? data.attributes : predeterminado;
+    const fields = (data.fields && data.fields.length > 0) ? data.fields.map((next) => {
+        return new Fields(next.field, next.image);
+    }) : [new Fields(predeterminado, predeterminado)];
+    const descripcion = (data.descriptions && data.descriptions.length > 0) ? data.descriptions[0].description : predeterminado;
+    const skills = (data.skills && data.skills.length > 0) ? data.skills.map((skill) => skill.skill) : [predeterminado];
+    const preEvolutions = (data.priorEvolutions && data.priorEvolutions.length > 0) ? data.priorEvolutions.map((prior) => {
+        return new Digi(prior.digimon, prior.image, prior.condition);
+    }) : [new Digi(predeterminado, predeterminado, predeterminado)];
+    const nextEvolutions = (data.nextEvolutions && data.nextEvolutions.length > 0) ? data.nextEvolutions.map((next) => {
+        return new Digi(next.digimon, next.image, next.condition);
+    }) : [new Digi(predeterminado, predeterminado, predeterminado)];
+    let level2 = [];
+    levels.forEach((level) => {
+        level2.push(level.level);
+    });
+    let atribute2 = [];
+    attributes.forEach((at) => {
+        atribute2.push(at.attribute);
+        console.log(at);
+    });
+    let digimonactual = new Digimon(id, nombre, xAntibody, imagen, level2, type, atribute2, fields, descripcion, skills, preEvolutions, nextEvolutions);
+    return digimonactual;
 }
 //# sourceMappingURL=DatosController.js.map

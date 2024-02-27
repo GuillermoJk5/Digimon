@@ -1,9 +1,9 @@
 class Card {
-    id : number;
+    id : string;
     nombre: string;
     imagen: string;
 
-    constructor( id : number, nombre: string,imagen: string) {
+    constructor( id : string, nombre: string,imagen: string) {
         this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;

@@ -49,7 +49,6 @@ function CargarDigimon(pagina) {
         console.log(data.content);
         for (const item of data.content) {
             let imagen = item.image.replace(/^"(.*)"$/, '$1');
-            console.log(item.name);
             let digimon = new Card(item.id, item.name, imagen);
             digimoncards.push(digimon);
         }
@@ -88,9 +87,9 @@ function CargarAtributo() {
     apiCaller.fetchData()
         .then((data) => {
         const listaatributos = [];
-        console.log(data.content);
         for (const item of data.content.fields) {
             let dato = new Dato(item.id, item.name);
+            console.log(item.name);
             listaatributos.push(dato);
         }
         // Guardar el array digimoncards en localStorage

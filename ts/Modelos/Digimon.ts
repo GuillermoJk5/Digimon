@@ -4,9 +4,9 @@
     name: string;
     xAntibody: boolean;
     imagen: string;
-    level: string;
+    level: string[];
     type: string;
-    attribute: string;
+    attribute: string[];
     fields: Fields[];
     descriptions: string;
     skills: string[];
@@ -18,9 +18,9 @@
         name: string,
         xAntibody: boolean,
         imagen: string,
-        level: string,
+        level: string[],
         type: string,
-        attribute: string,
+        attribute: string[],
         fields: Fields[],
         descriptions: string,
         skills: string[],
