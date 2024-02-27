@@ -41,36 +41,63 @@ function pintarDatos(digimon) {
     const atributes = digimon.attribute.join('/');
     contenedor.find('#atributo').text(atributes);
     contenedor.find('#tipo').text(digimon.type);
+    const fieldrow = contenedor.find("#fieldsrow");
+    digimon.fields.forEach(field => {
+        let colfields = $("#fields").clone(true, true);
+        colfields.find("#fieldtext").text(field.nombre);
+        colfields.find("#fieldimg").attr('src', field.imagen);
+        colfields.appendTo(fieldrow).show();
+    });
+    contenedor.find("#descripcion").text(digimon.descriptions);
+    const skills = contenedor.find("#listaskill");
+    digimon.skills.forEach(skill => {
+        let skillcampo = $("#skill").clone(true, true);
+        skillcampo.find("#skillname").text(skill.name);
+        skillcampo.find("#skilldescripcion").text(skill.descripcion);
+        skillcampo.appendTo(skills).show();
+    });
     contenedor.appendTo(body).show();
 }
 function generardigimon(data) {
-    const predeterminado = "Sin Datos"; // Establecer el valor predeterminado aquí
+    const predeterminado = ["Sin Datos"]; // Establecer el valor predeterminado aquí
     const id = data.id || predeterminado;
     const nombre = data.name || predeterminado;
     const xAntibody = data.xAntibody || predeterminado;
-    const imagen = (data.images && data.images.length > 0) ? data.images[0].href : predeterminado;
+    const imagen = (data.images && data.images.length > 0) ? data.images[0].href : predeterminado[0];
     const levels = (data.levels && data.levels.length > 0) ? data.levels : predeterminado;
-    const type = (data.types && data.types.length > 0) ? data.types[0].type : predeterminado;
+    const type = (data.types && data.types.length > 0) ? data.types[0].type : predeterminado[0];
     const attributes = (data.attributes && data.attributes.length > 0) ? data.attributes : predeterminado;
     const fields = (data.fields && data.fields.length > 0) ? data.fields.map((next) => {
         return new Fields(next.field, next.image);
-    }) : [new Fields(predeterminado, predeterminado)];
+    }) : [new Fields(predeterminado[0], predeterminado[0])];
     const descripcion = (data.descriptions && data.descriptions.length > 0) ? data.descriptions[0].description : predeterminado;
-    const skills = (data.skills && data.skills.length > 0) ? data.skills.map((skill) => skill.skill) : [predeterminado];
+    const skills = (data.skills && data.skills.length > 0) ? data.skills.map((skill) => {
+        return new Skill(skill.skill, skill.description);
+    }) : [new Skill(predeterminado[0], predeterminado[0])];
     const preEvolutions = (data.priorEvolutions && data.priorEvolutions.length > 0) ? data.priorEvolutions.map((prior) => {
         return new Digi(prior.digimon, prior.image, prior.condition);
-    }) : [new Digi(predeterminado, predeterminado, predeterminado)];
+    }) : [new Digi(predeterminado[0], predeterminado[0], predeterminado[0])];
     const nextEvolutions = (data.nextEvolutions && data.nextEvolutions.length > 0) ? data.nextEvolutions.map((next) => {
         return new Digi(next.digimon, next.image, next.condition);
-    }) : [new Digi(predeterminado, predeterminado, predeterminado)];
+    }) : [new Digi(predeterminado[0], predeterminado[0], predeterminado[0])];
     let level2 = [];
-    levels.forEach((level) => {
-        level2.push(level.level);
-    });
+    if (levels[0] !== "Sin Datos") {
+        levels.forEach((level) => {
+            level2.push(level.level);
+        });
+    }
+    else {
+        level2 = levels;
+    }
     let atribute2 = [];
-    attributes.forEach((at) => {
-        atribute2.push(at.attribute);
-    });
+    if (attributes[0] !== "Sin Datos") {
+        attributes.forEach((at) => {
+            atribute2.push(at.attribute);
+        });
+    }
+    else {
+        atribute2 = attributes;
+    }
     let digimonactual = new Digimon(id, nombre, xAntibody, imagen, level2, type, atribute2, fields, descripcion, skills, preEvolutions, nextEvolutions);
     return digimonactual;
 }

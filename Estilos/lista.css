@@ -11,3 +11,9 @@ img{
   /* height: 320px;
   width: 320px; */
 }
+
+a {
+  text-decoration: none; /* Elimina la subrayado de todos los enlaces */
+  color: inherit; /* Toma el color del texto heredado */
+  /* Otros estilos que deseas eliminar */
+}

@@ -7,10 +7,12 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../Estilos/cabecera.css">
+    <link rel="stylesheet" href="../Estilos/datos.css">
     
 </head>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../js/Modelos/Skill.js"></script>
 <script src="../js/Modelos/Card.js"></script>
 <script src="../js/Modelos/Dato.js"></script>
 <script src="../js/Modelos/Digi.js"></script>
@@ -22,26 +24,47 @@
 <script src="../js/Controladores/DatosController.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script><header id="cabecera"></header>
 <body id="body">
+    
     <div class="container" id="contenedor" style="display: none;">
         <div class="row justify-content-center">
           <div class="col-md-6 text-center">
-            <h1 id="nombre">Título centrado</h1>
+            <h1 id="nombre">Sin Datos</h1>
             <img id="imagen" src="" class="img-fluid mt-4" alt="Imagen">
           </div>
         </div>
         <div class="row">
             <div class="col">
-                <p id="level">Child</p>
+                <p id="level">Sin Datos</p>
             </div>
             <div class="col">
-                <p id="atributo">Child</p>
+                <p id="atributo">Sin Datos</p>
             </div>
             <div class="col">
-                <p id="tipo">Child</p>
+                <p id="tipo">Sin Datos</p>
+            </div>
+        </div>
+        <div class="row" id="fieldsrow">
+            <div class="col" id="fields" style="display: none;">
+                <img id="fieldimg">
+                <p id="fieldtext"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p id="descripcion"></p>
+            </div>
+        </div>
+        <div class="row habilidades">
+            <div class="col" id="listaskill">
+                <div class="row" id="skill" style="display: none;">
+                    <p id="skillname"></p><br>
+                    <p id="skilldescripcion"></p>
+                </div>
             </div>
         </div>
       </div>
 </body>
+
 <script>
 
 

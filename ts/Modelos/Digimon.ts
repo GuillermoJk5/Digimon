@@ -9,7 +9,7 @@
     attribute: string[];
     fields: Fields[];
     descriptions: string;
-    skills: string[];
+    skills: Skill[];
     priorEvolutions: Digi[];
     nextEvolutions: Digi[];
 
@@ -23,7 +23,7 @@
         attribute: string[],
         fields: Fields[],
         descriptions: string,
-        skills: string[],
+        skills: Skill[],
         priorEvolutions: Digi[],
         nextEvolutions: Digi[]
     ) {
