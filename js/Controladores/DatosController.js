@@ -70,7 +70,6 @@ function generardigimon(data) {
     let atribute2 = [];
     attributes.forEach((at) => {
         atribute2.push(at.attribute);
-        console.log(at);
     });
     let digimonactual = new Digimon(id, nombre, xAntibody, imagen, level2, type, atribute2, fields, descripcion, skills, preEvolutions, nextEvolutions);
     return digimonactual;
