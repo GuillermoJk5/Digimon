@@ -22,11 +22,15 @@ h1{
     flex-direction: row;
 }
 .tabla{
-    background-color: aqua;
+    
     border-bottom: 1px solid black;
 }
 .habilidadnombre{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+h2{
+    background-color: #078CDB; 
+    color: #FE8014; 
 }
