@@ -4,3 +4,7 @@ body{
 .habilidades{
     text-align: left;
 }
+.imglista{
+    height: auto;
+    width: 200px;
+}

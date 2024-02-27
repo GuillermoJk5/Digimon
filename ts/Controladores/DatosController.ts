@@ -73,6 +73,24 @@ function pintarDatos(digimon: Digimon) {
           skillcampo.appendTo(skills).show();
         });
 
+        const prelista=contenedor.find("#prelista");
+        digimon.priorEvolutions.forEach(prior => {
+          let pre = $("#pre").clone(true, true);
+          pre.find("#prenombre").text(prior.nombre);
+          pre.find("#precondicion").text(prior.condicion);
+          pre.find("#preimg").attr('src', prior.imagen);
+          pre.appendTo(prelista).show();
+        });
+        const nextlista=contenedor.find("#nextlista");
+        digimon.nextEvolutions.forEach(nexto => {
+          let next = $("#next").clone(true, true);
+          next.find("#nextnombre").text(nexto.nombre);
+          next.find("#nextcondicion").text(nexto.condicion);
+          next.find("#nextimg").attr('src', nexto.imagen);
+          next.appendTo(nextlista).show();
+        });
+
+
         contenedor.appendTo(body).show();
     }
 
