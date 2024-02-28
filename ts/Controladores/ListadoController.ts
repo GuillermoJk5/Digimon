@@ -1,8 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-  let digimondcardslist: Card[] = [];
-  let pagina = obtenerParametroDeURL("pagina");
+  cargarpagina();
+});
 
-    CargarDigimon(pagina);
+function cargarpagina(){
+    let digimondcardslist: Card[] = [];
+  let pagina = localStorage.getItem('pagina')??"0";
+
+    CargarDigimon(parseInt(pagina));
     const digimoncardsString = localStorage.getItem('digimoncards');
     
     if (digimoncardsString !== null) {
@@ -13,8 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
       pintarlista(digimon);
     });
   }
-});
-
+}
 
 function pintarlista(digimon: Card) {
   const listado = $("#lista");
@@ -27,29 +30,37 @@ function pintarlista(digimon: Card) {
 }
 
 function pagAtras() {
-  const paginaActual = obtenerParametroDeURL("pagina");
-  if (paginaActual > 0) {
-    irA((paginaActual - 1).toString());
+  let pagina = localStorage.getItem('pagina')??"0";
+  let paginanumber = parseInt(pagina);
+  if (paginanumber > 0) {
+      paginanumber--;
+    localStorage.setItem('pagina', paginanumber.toString());
+    cargarpagina()
   }
 }
 
 function pagAdelante() {
-  const paginaActual = obtenerParametroDeURL("pagina");
-  if (paginaActual < 49) {
-    irA((paginaActual + 1).toString());
+  let pagina = localStorage.getItem('pagina')??"0";
+  let paginanumber = parseInt(pagina);
+  if (paginanumber < 49) {
+      paginanumber++;
+    localStorage.setItem('pagina', paginanumber.toString());
+    cargarpagina()
   }
 }
 
-function obtenerParametroDeURL(pagina: string): number {
-  const urlActual = window.location.href;
-  const parametrosURL = new URLSearchParams(new URL(urlActual).search);
-  let valorParametro = parametrosURL.get(pagina);
-  if (valorParametro === null) {
-    valorParametro = "0";
-  }
-  return parseInt(valorParametro);
-}
+// function obtenerParametroDeURL(pagina: string): number {
+//   const urlActual = window.location.href;
+//   const parametrosURL = new URLSearchParams(new URL(urlActual).search);
+//   let valorParametro = parametrosURL.get(pagina);
+//   if (valorParametro === null) {
+//     valorParametro = "0";
+//   }
+//   return parseInt(valorParametro);
+// }
 
-function irA(pagina: string) {
-  window.location.href = "Listado.html?pagina=" + pagina;
-}
+// function irA(pagina: string) {
+//   window.location.href = "Listado.html?pagina=" + pagina;
+//   console.log("A");
+//   cargarpagina();
+// }
