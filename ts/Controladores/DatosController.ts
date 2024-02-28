@@ -78,9 +78,13 @@ function pintarDatos(digimon: Digimon) {
   const prelista=contenedor.find("#prelista");
   digimon.priorEvolutions.forEach(prior => {
       let pre = $("#pre").clone(true, true);
+      pre.removeAttr('onclick');
       pre.find("#prenombre").text(prior.nombre);
       // pre.find("#precondicion").text(prior.condicion);
       pre.find("#preimg").attr('src', prior.imagen);
+      pre.on('click', () => {
+        cambiardigimon(prior.nombre);
+    });
       pre.appendTo(prelista).show();
   });
 
@@ -88,9 +92,13 @@ function pintarDatos(digimon: Digimon) {
   const nextlista=contenedor.find("#nextlista");
   digimon.nextEvolutions.forEach(nexto => {
       let next = $("#next").clone(true, true);
+      next.removeAttr("onclick");
       next.find("#nextnombre").text(nexto.nombre);
       // next.find("#nextcondicion").text(nexto.condicion);
       next.find("#nextimg").attr('src', nexto.imagen);
+      next.on('click', () => {
+        cambiardigimon(nexto.nombre);
+    });
       next.appendTo(nextlista).show();
   });
 
@@ -163,4 +171,9 @@ const parametro = rescatarparametro();
 if (typeof parametro === 'string') {
   // Mostrar los datos del Digimon correspondiente al 'id'
   mostrarDatos(parametro);
+}
+
+function cambiardigimon(nombre:string){
+    console.log("Mostrar >"+nombre);
+    window.location.href="Datos.html?id="+nombre;
 }
