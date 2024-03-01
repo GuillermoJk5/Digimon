@@ -2,16 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
   cargarpagina();
 });
 
-function cargarpagina(){
-    
-    let pagina = localStorage.getItem('pagina')??"0";
-
-    CargarDigimon(parseInt(pagina));
-    
-    actualizarvista();
+function cargarpagina() {
+  let pagina = localStorage.getItem('pagina') ?? "0";
+  CargarDigimon(parseInt(pagina));
+  $('#paginaactual').text(pagina);
+  actualizarvista();
 }
 
-function pintarlista(digimon: Card) {
+function pintarlista(digimon:Card) {
   const listado = $("#lista");
   let copia = $("#cartica").clone(true, true);
   copia.removeAttr('id');
@@ -23,58 +21,42 @@ function pintarlista(digimon: Card) {
 
 async function pagAtras() {
   console.log("PATRAS");
-  let pagina = localStorage.getItem('pagina')??"0";
+  let pagina = localStorage.getItem('pagina') ?? "0";
   let paginanumber = parseInt(pagina);
   if (paginanumber > 0) {
       paginanumber--;
-    localStorage.setItem('pagina', paginanumber.toString());
+      localStorage.setItem('pagina', paginanumber.toString());
   } 
   $('#lista').empty();
   await CargarDigimon(paginanumber);
+  $('#paginaactual').text(paginanumber.toString());
   actualizarvista();
 }
 
 async function pagAdelante() {
   console.log("PALANTE");
-  let pagina = localStorage.getItem('pagina')??"0";
+  let pagina = localStorage.getItem('pagina') ?? "0";
   let paginanumber = parseInt(pagina);
   if (paginanumber < 49) {
       paginanumber++;
-    localStorage.setItem('pagina', paginanumber.toString());
+      localStorage.setItem('pagina', paginanumber.toString());
   } 
   $('#lista').empty();
   await CargarDigimon(paginanumber);
-  console.log("RAUL");
+  $('#paginaactual').text(paginanumber.toString());
   actualizarvista();
 }
 
-function actualizarvista(){
-  let digimondcardslist: Card[] = [];
+function actualizarvista() {
+  let digimondcardslist = [];
   const digimoncardsString = localStorage.getItem('digimoncards');
-    
-    if (digimoncardsString !== null) {
+  
+  if (digimoncardsString !== null) {
       digimondcardslist = JSON.parse(digimoncardsString);
       console.log(digimondcardslist);
 
-      digimondcardslist.forEach((digimon: Card) => {
-      // console.log(digimon);
-      
-      pintarlista(digimon);
-    });
+      digimondcardslist.forEach((digimon:Card) => {
+          pintarlista(digimon);
+      });
+  }
 }
-}
-// function obtenerParametroDeURL(pagina: string): number {
-//   const urlActual = window.location.href;
-//   const parametrosURL = new URLSearchParams(new URL(urlActual).search);
-//   let valorParametro = parametrosURL.get(pagina);
-//   if (valorParametro === null) {
-//     valorParametro = "0";
-//   }
-//   return parseInt(valorParametro);
-// }
-
-// function irA(pagina: string) {
-//   window.location.href = "Listado.html?pagina=" + pagina;
-//   console.log("A");
-//   cargarpagina();
-// }

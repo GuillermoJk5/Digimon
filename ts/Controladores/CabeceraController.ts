@@ -52,16 +52,13 @@ function filtrar(){
     let nombre = obtenerValorComoString($("#filtronombre").val());
     let nivel = obtenerValorComoString($("#filtronivel").val());
     let atributo = obtenerValorComoString($("#filtroatributo").val());
-    let tipo = obtenerValorComoString($("#filtrotipo").val());
-    let habitat = obtenerValorComoString($("#filtrohabitat").val());
+   
 
    let filtros = {
         nombre : nombre,
         nivel: nivel,
-        atributo : atributo,
-        tipo : tipo,
-        habitat :habitat
-    }
+        atributo : atributo
+   }
 
     localStorage.setItem('filtros', JSON.stringify(filtros));
 
