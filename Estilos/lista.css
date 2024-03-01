@@ -17,3 +17,7 @@ a {
   color: inherit; /* Toma el color del texto heredado */
   /* Otros estilos que deseas eliminar */
 }
+.botonera{
+  display: flex;
+  flex-direction: row;
+}
