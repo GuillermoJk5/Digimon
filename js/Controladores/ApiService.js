@@ -1,45 +1,57 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 // Función para cargar los Digimon
 function CargarDigimon(pagina) {
-    console.log(pagina);
-    let apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=${pagina}`;
-    // Obtener filtros del localStorage
-    const filtros = JSON.parse(localStorage.getItem('filtros') || '[]');
-    // Aplicar filtros si existen
-    if (filtros !== "[]" && filtros !== undefined) {
-        if (filtros.nombre !== undefined) {
-            apiUrl = apiUrl + "&name=" + filtros.nombre;
-        }
-        if (filtros.tipo !== undefined) {
-            apiUrl = apiUrl + "&type=" + filtros.tipo;
-        }
-        if (filtros.atributo !== undefined) {
-            apiUrl = apiUrl + "&attribute=" + filtros.atributo;
-        }
-        if (filtros.nivel !== undefined) {
-            apiUrl = apiUrl + "&level=" + filtros.nivel;
-        }
-        if (filtros.habitat !== undefined) {
-            apiUrl = apiUrl + "&field=" + filtros.habitat;
-        }
-    }
-    // Crear una instancia de ApiCaller
-    const apiCaller = new ApiCaller(apiUrl);
-    // Llamar al método fetchData
-    apiCaller.fetchData()
-        .then((data) => {
-        const digimoncards = [];
-        for (const item of data.content) {
-            let imagen = item.image.replace(/^"(.*)"$/, '$1');
-            let digimon = new Card(item.id, item.name, imagen);
-            digimoncards.push(digimon);
-        }
-        // Guardar el array digimoncards en localStorage
-        localStorage.setItem('digimoncards', JSON.stringify(digimoncards));
-    })
-        .catch((error) => {
-        // Manejar el error si la llamada falla
-        console.error('Error occurred:', error);
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log(pagina);
+        let apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=${pagina}`;
+        // Obtener filtros del localStorage
+        const filtros = JSON.parse(localStorage.getItem('filtros') || '[]');
+        // Aplicar filtros si existen
+        // if(filtros!=="[]"&&filtros!==undefined){
+        //     if(filtros.nombre!== undefined){
+        //         apiUrl = apiUrl + "&name="+filtros.nombre;
+        //     }
+        //     if(filtros.tipo!==undefined){
+        //         apiUrl = apiUrl + "&type="+filtros.tipo;
+        //     }
+        //     if(filtros.atributo!==undefined){
+        //         apiUrl = apiUrl + "&attribute="+filtros.atributo;
+        //     }
+        //     if(filtros.nivel!==undefined){
+        //         apiUrl = apiUrl + "&level="+filtros.nivel;
+        //     }
+        //     if(filtros.habitat!==undefined){
+        //         apiUrl = apiUrl + "&field="+filtros.habitat;
+        //     }
+        // }
+        // Crear una instancia de ApiCaller
+        const apiCaller = new ApiCaller(apiUrl);
+        // Llamar al método fetchData
+        yield apiCaller.fetchData()
+            .then((data) => {
+            const digimoncards = [];
+            for (const item of data.content) {
+                let imagen = item.image.replace(/^"(.*)"$/, '$1');
+                let digimon = new Card(item.id, item.name, imagen);
+                digimoncards.push(digimon);
+            }
+            console.log(digimoncards);
+            // Guardar el array digimoncards en localStorage
+            localStorage.setItem('digimoncards', JSON.stringify(digimoncards));
+        })
+            .catch((error) => {
+            // Manejar el error si la llamada falla
+            console.error('Error occurred:', error);
+        });
     });
 }
 // Función para cargar tipos de Digimon

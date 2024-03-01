@@ -44,10 +44,11 @@ function pintarDatos(digimon) {
     contenedor.find('#imagen').attr('src', digimon.imagen);
     // Cambiar el texto del nivel del Digimon
     const levels = digimon.level.join('/');
-    contenedor.find('#level').text(levels);
+    contenedor.find('#level').text("Etapa Evolutiva: " + levels);
     // Cambiar el texto del atributo del Digimon
     const atributes = digimon.attribute.join('/');
-    contenedor.find('#atributo').text(atributes);
+    contenedor.find('#atributo').text("Atributo: " + atributes);
+    contenedor.find('#tipo').text("Tipo: " + digimon.type);
     // Pintar los campos del Digimon
     const fieldrow = contenedor.find("#fieldsrow");
     digimon.fields.forEach(field => {
@@ -70,18 +71,26 @@ function pintarDatos(digimon) {
     const prelista = contenedor.find("#prelista");
     digimon.priorEvolutions.forEach(prior => {
         let pre = $("#pre").clone(true, true);
+        pre.removeAttr('onclick');
         pre.find("#prenombre").text(prior.nombre);
-        pre.find("#precondicion").text(prior.condicion);
+        // pre.find("#precondicion").text(prior.condicion);
         pre.find("#preimg").attr('src', prior.imagen);
+        pre.on('click', () => {
+            cambiardigimon(prior.nombre);
+        });
         pre.appendTo(prelista).show();
     });
     // Pintar las evoluciones siguientes del Digimon
     const nextlista = contenedor.find("#nextlista");
     digimon.nextEvolutions.forEach(nexto => {
         let next = $("#next").clone(true, true);
+        next.removeAttr("onclick");
         next.find("#nextnombre").text(nexto.nombre);
-        next.find("#nextcondicion").text(nexto.condicion);
+        // next.find("#nextcondicion").text(nexto.condicion);
         next.find("#nextimg").attr('src', nexto.imagen);
+        next.on('click', () => {
+            cambiardigimon(nexto.nombre);
+        });
         next.appendTo(nextlista).show();
     });
     // Agregar el contenedor con los datos del Digimon al cuerpo del documento y mostrarlo
@@ -137,8 +146,12 @@ function generardigimon(data) {
     else {
         atribute2 = attributes;
     }
+    // Ordenar las evoluciones por nombre del Digimon
+    preEvolutions.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    nextEvolutions.sort((a, b) => a.nombre.localeCompare(b.nombre));
     // Crear y retornar un objeto Digimon con los datos obtenidos
     let digimonactual = new Digimon(id, nombre, xAntibody, imagen, level2, type, atribute2, fields, descripcion, skills, preEvolutions, nextEvolutions);
+    console.log(digimonactual);
     return digimonactual;
 }
 // Obtener el parámetro 'id' de la URL
@@ -147,5 +160,9 @@ const parametro = rescatarparametro();
 if (typeof parametro === 'string') {
     // Mostrar los datos del Digimon correspondiente al 'id'
     mostrarDatos(parametro);
+}
+function cambiardigimon(nombre) {
+    console.log("Mostrar >" + nombre);
+    window.location.href = "Datos.html?id=" + nombre;
 }
 //# sourceMappingURL=DatosController.js.map

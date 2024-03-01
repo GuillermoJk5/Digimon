@@ -1,40 +1,73 @@
 "use strict";
-// Cuando el contenido del DOM está completamente cargado
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 document.addEventListener('DOMContentLoaded', function () {
-    // Llamar a la función para cargar los Digimon
-    CargarDigimon(0);
-    // Las siguientes funciones están comentadas. Pueden ser llamadas más adelante si son necesarias.
-    // CargarAtributo();
-    // CargarFields();
-    // CargarLevels();
-    // CargarTipos();
-    // Mostrar la página después de cargar los Digimon
-    mostrarpagina();
+    cargarpagina();
 });
-// Función para mostrar la página
-function mostrarpagina() {
-    // Obtener el array de Digimon del localStorage
-    const digimonarray = JSON.parse(localStorage.getItem('digimoncards') || '[]');
-    // Iterar sobre cada Digimon en el array y pintarlo en la lista
-    digimonarray.forEach((digimon) => {
-        pintarlista(digimon);
+function cargarpagina() {
+    var _a;
+    let pagina = (_a = localStorage.getItem('pagina')) !== null && _a !== void 0 ? _a : "0";
+    CargarDigimon(parseInt(pagina));
+    $('#paginaactual').text(pagina);
+    actualizarvista();
+}
+function pintarlista(digimon) {
+    const listado = $("#lista");
+    let copia = $("#cartica").clone(true, true);
+    copia.removeAttr('id');
+    copia.find('.card-title').text(digimon.nombre);
+    copia.find('.card-img-top').attr('src', digimon.imagen);
+    copia.find('.enlace-digimon').attr('href', "Datos.html?id=" + digimon.id);
+    copia.appendTo(listado).show();
+}
+function pagAtras() {
+    var _a;
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log("PATRAS");
+        let pagina = (_a = localStorage.getItem('pagina')) !== null && _a !== void 0 ? _a : "0";
+        let paginanumber = parseInt(pagina);
+        if (paginanumber > 0) {
+            paginanumber--;
+            localStorage.setItem('pagina', paginanumber.toString());
+        }
+        $('#lista').empty();
+        yield CargarDigimon(paginanumber);
+        $('#paginaactual').text(paginanumber.toString());
+        actualizarvista();
     });
 }
-// Función para pintar un Digimon en la lista
-function pintarlista(digimon) {
-    // Seleccionar el contenedor de la lista
-    const listado = $("#lista");
-    // Clonar el div #cartica
-    let copia = $("#cartica").clone(true, true);
-    // Eliminar el atributo id de la copia para evitar duplicados en los identificadores
-    copia.removeAttr('id');
-    // Cambiar el texto de la tarjeta con el nombre del Digimon
-    copia.find('.card-title').text(digimon.nombre);
-    // Cambiar la imagen de la tarjeta con la imagen del Digimon
-    copia.find('.card-img-top').attr('src', digimon.imagen);
-    // Establecer el enlace de la tarjeta para redirigir a la página de detalles del Digimon
-    copia.find('.enlace-digimon').attr('href', "Datos.html?id=" + digimon.id);
-    // Agregar la copia al contenedor de la lista y mostrarla
-    copia.appendTo(listado).show();
+function pagAdelante() {
+    var _a;
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log("PALANTE");
+        let pagina = (_a = localStorage.getItem('pagina')) !== null && _a !== void 0 ? _a : "0";
+        let paginanumber = parseInt(pagina);
+        if (paginanumber < 49) {
+            paginanumber++;
+            localStorage.setItem('pagina', paginanumber.toString());
+        }
+        $('#lista').empty();
+        yield CargarDigimon(paginanumber);
+        $('#paginaactual').text(paginanumber.toString());
+        actualizarvista();
+    });
+}
+function actualizarvista() {
+    let digimondcardslist = [];
+    const digimoncardsString = localStorage.getItem('digimoncards');
+    if (digimoncardsString !== null) {
+        digimondcardslist = JSON.parse(digimoncardsString);
+        console.log(digimondcardslist);
+        digimondcardslist.forEach((digimon) => {
+            pintarlista(digimon);
+        });
+    }
 }
 //# sourceMappingURL=ListadoController.js.map
