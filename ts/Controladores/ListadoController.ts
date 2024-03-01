@@ -3,20 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function cargarpagina(){
-    let digimondcardslist: Card[] = [];
-  let pagina = localStorage.getItem('pagina')??"0";
+    
+    let pagina = localStorage.getItem('pagina')??"0";
 
     CargarDigimon(parseInt(pagina));
-    const digimoncardsString = localStorage.getItem('digimoncards');
     
-    if (digimoncardsString !== null) {
-      digimondcardslist = JSON.parse(digimoncardsString);
-      console.log(digimondcardslist);
-      digimondcardslist.forEach((digimon: Card) => {
-      console.log(pagina);
-      pintarlista(digimon);
-    });
-  }
+    actualizarvista();
 }
 
 function pintarlista(digimon: Card) {
@@ -29,26 +21,48 @@ function pintarlista(digimon: Card) {
   copia.appendTo(listado).show();
 }
 
-function pagAtras() {
+async function pagAtras() {
+  console.log("PATRAS");
   let pagina = localStorage.getItem('pagina')??"0";
   let paginanumber = parseInt(pagina);
   if (paginanumber > 0) {
       paginanumber--;
     localStorage.setItem('pagina', paginanumber.toString());
-    cargarpagina()
-  }
+  } 
+  $('#lista').empty();
+  await CargarDigimon(paginanumber);
+  actualizarvista();
 }
 
-function pagAdelante() {
+async function pagAdelante() {
+  console.log("PALANTE");
   let pagina = localStorage.getItem('pagina')??"0";
   let paginanumber = parseInt(pagina);
   if (paginanumber < 49) {
       paginanumber++;
     localStorage.setItem('pagina', paginanumber.toString());
-    cargarpagina()
-  }
+  } 
+  $('#lista').empty();
+  await CargarDigimon(paginanumber);
+  console.log("RAUL");
+  actualizarvista();
 }
 
+function actualizarvista(){
+  let digimondcardslist: Card[] = [];
+  const digimoncardsString = localStorage.getItem('digimoncards');
+    
+    if (digimoncardsString !== null) {
+      digimondcardslist = JSON.parse(digimoncardsString);
+      console.log(digimondcardslist);
+
+      digimondcardslist.forEach((digimon: Card) => {
+      // console.log(digimon);
+      
+      pintarlista(digimon);
+    });
+}
+}
 // function obtenerParametroDeURL(pagina: string): number {
 //   const urlActual = window.location.href;
 //   const parametrosURL = new URLSearchParams(new URL(urlActual).search);

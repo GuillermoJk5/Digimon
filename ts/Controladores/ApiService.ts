@@ -1,5 +1,5 @@
 // Función para cargar los Digimon
-function CargarDigimon(pagina: number) {
+async function CargarDigimon(pagina: number) {
     console.log(pagina);
     let apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=${pagina}`;
     
@@ -7,29 +7,29 @@ function CargarDigimon(pagina: number) {
     const filtros = JSON.parse(localStorage.getItem('filtros') || '[]');
 
     // Aplicar filtros si existen
-    if(filtros!=="[]"&&filtros!==undefined){
-        if(filtros.nombre!== undefined){
-            apiUrl = apiUrl + "&name="+filtros.nombre;
-        }
-        if(filtros.tipo!==undefined){
-            apiUrl = apiUrl + "&type="+filtros.tipo;
-        }
-        if(filtros.atributo!==undefined){
-            apiUrl = apiUrl + "&attribute="+filtros.atributo;
-        }
-        if(filtros.nivel!==undefined){
-            apiUrl = apiUrl + "&level="+filtros.nivel;
-        }
-        if(filtros.habitat!==undefined){
-            apiUrl = apiUrl + "&field="+filtros.habitat;
-        }
-    }
+    // if(filtros!=="[]"&&filtros!==undefined){
+    //     if(filtros.nombre!== undefined){
+    //         apiUrl = apiUrl + "&name="+filtros.nombre;
+    //     }
+    //     if(filtros.tipo!==undefined){
+    //         apiUrl = apiUrl + "&type="+filtros.tipo;
+    //     }
+    //     if(filtros.atributo!==undefined){
+    //         apiUrl = apiUrl + "&attribute="+filtros.atributo;
+    //     }
+    //     if(filtros.nivel!==undefined){
+    //         apiUrl = apiUrl + "&level="+filtros.nivel;
+    //     }
+    //     if(filtros.habitat!==undefined){
+    //         apiUrl = apiUrl + "&field="+filtros.habitat;
+    //     }
+    // }
 
     // Crear una instancia de ApiCaller
     const apiCaller = new ApiCaller(apiUrl);
 
     // Llamar al método fetchData
-    apiCaller.fetchData()
+   await apiCaller.fetchData()
         .then((data: any) => {
             const digimoncards = [];
             for (const item of data.content) {
