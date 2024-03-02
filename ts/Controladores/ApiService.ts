@@ -32,7 +32,6 @@ async function CargarDigimon(url:string) {
    await apiCaller.fetchData()
         .then((data: any) => {
 
-
             const digimoncards = [];
             for (const item of data.content) {
                 let imagen = item.image.replace(/^"(.*)"$/, '$1');
@@ -47,7 +46,7 @@ async function CargarDigimon(url:string) {
        
 
             if(data.pageable){
-                console.log("pagina>"+data.toString());
+                
                 let currentpage =  data.pageable.currentPage;
                 let nextpage =  data.pageable.nextPage;
                 let previouspage = data.pageable.previousPage;
