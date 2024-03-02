@@ -1,7 +1,7 @@
 // Función para cargar los Digimon
-async function CargarDigimon(pagina: number) {
-    console.log(pagina);
-    let apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=${pagina}`;
+async function CargarDigimon(url:string) {
+    console.log(url);
+    // let apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=${pagina}`;
     
     // Obtener filtros del localStorage
     const filtros = JSON.parse(localStorage.getItem('filtros') || '[]');
@@ -26,11 +26,13 @@ async function CargarDigimon(pagina: number) {
     // }
 
     // Crear una instancia de ApiCaller
-    const apiCaller = new ApiCaller(apiUrl);
+    const apiCaller = new ApiCaller(url);
 
     // Llamar al método fetchData
    await apiCaller.fetchData()
         .then((data: any) => {
+
+
             const digimoncards = [];
             for (const item of data.content) {
                 let imagen = item.image.replace(/^"(.*)"$/, '$1');
@@ -41,11 +43,26 @@ async function CargarDigimon(pagina: number) {
             console.log(digimoncards);
             // Guardar el array digimoncards en localStorage
             localStorage.setItem('digimoncards', JSON.stringify(digimoncards));
-        })
-        .catch((error: any) => {
+       
+       
+
+            if(data.pageable){
+                console.log("pagina>"+data.toString());
+                let currentpage =  data.pageable.currentPage;
+                let nextpage =  data.pageable.nextPage;
+                let previouspage = data.pageable.previousPage;
+                const totalpages=data.pageable.totalPages;
+                let pagina = new Pagina(currentpage,nextpage,previouspage,totalpages)
+                localStorage.setItem('pagina', JSON.stringify(pagina));
+            }else{
+                console.log("Fallo pageable");
+            }
+ })
+ .catch((error: any) => {
             // Manejar el error si la llamada falla
             console.error('Error occurred:', error);
         });
+           
 }
 
 // Función para cargar tipos de Digimon

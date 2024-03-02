@@ -1,10 +1,10 @@
 
 
 document.addEventListener('DOMContentLoaded', function() {
-// rellenarSelect("filtronivel");
-// rellenarSelect("filtroatributo");
-// rellenarSelect("filtrotipo");
-// rellenarSelect("filtrohabitat");
+rellenarSelect("filtronivel");
+rellenarSelect("filtroatributo");
+rellenarSelect("filtrotipo");
+rellenarSelect("filtrohabitat");
 
 });
 
@@ -62,6 +62,6 @@ function filtrar(){
 
     localStorage.setItem('filtros', JSON.stringify(filtros));
 
-    CargarDigimon(0);
+    CargarDigimon("");
 
 }
