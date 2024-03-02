@@ -32,6 +32,8 @@ function rellenarSelect(nombre) {
 function quitarfiltro() {
     localStorage.removeItem('filtros');
     actualizar();
+    $("#filtronivel").val("");
+    $("#filtroatributo").val("");
 }
 function filtrar() {
     function obtenerValorComoString(valor) {

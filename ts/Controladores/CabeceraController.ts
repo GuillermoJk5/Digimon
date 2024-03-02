@@ -28,6 +28,8 @@ async function CargarSelects() {
 function quitarfiltro(){
     localStorage.removeItem('filtros');
     actualizar();
+    $("#filtronivel").val("");
+    $("#filtroatributo").val("");
 }
 
 function filtrar(){
