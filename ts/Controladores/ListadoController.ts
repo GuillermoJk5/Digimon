@@ -25,33 +25,39 @@ function pintarlista(digimon:Card) {
 
 // Función para cargar la página siguiente
 async function pagAdelante() {
+  let numpagina=0;
   let pagina = new Pagina("0", "0", "0", "0");
   let paginajson = localStorage.getItem('pagina');
   if (paginajson !== null) {
     pagina = JSON.parse(paginajson);
-    if (pagina.nextpage !== "") {
-      pagina.currentpage = pagina.nextpage;
+    if (pagina.nextpage == "") {
+      pagina.nextpage = "https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page="+pagina.currentpage;
     }
+     numpagina = parseInt(pagina.currentpage) + 1;
   }
+
   $('#lista').empty();
-  await CargarDigimon(pagina.currentpage);
-  $('#paginaactual').text(pagina.currentpage);
+  await CargarDigimon(pagina.nextpage);
+  $('#paginaactual').text(numpagina);
   actualizarvista();
 }
 
 // Función para cargar la página anterior
 async function pagAtras() {
+  let numpagina=0;
   let pagina = new Pagina("0", "0", "0", "0");
   let paginajson = localStorage.getItem('pagina');
   if (paginajson !== null) {
     pagina = JSON.parse(paginajson);
-    if (pagina.previouspage !== "") {
-      pagina.currentpage = pagina.previouspage;
+    if (pagina.previouspage == "") {
+      pagina.previouspage = "https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page="+pagina.currentpage;
     }
+      numpagina = parseInt(pagina.currentpage) - 1;
   }
+ 
   $('#lista').empty();
-  await CargarDigimon(pagina.currentpage);
-  $('#paginaactual').text(pagina.currentpage);
+  await CargarDigimon(pagina.previouspage);
+  $('#paginaactual').text(numpagina);
   actualizarvista();
 }
 
