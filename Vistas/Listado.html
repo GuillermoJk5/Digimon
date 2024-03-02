@@ -22,10 +22,45 @@
 <script src="../js/Controladores/ListadoController.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <body>
-
-<header id="cabecera"></header>
-<main>
-<div class="col" id="cartica" name ="cartica" style="display: none;">
+    <header>
+        <div class="container">
+            <!-- Cabecera -->
+            <div class="row">
+                <div class="col">
+                    <img src="../Img/digimon.png" alt="Digimon-logo">
+                </div>
+                <div class="col filtro">   
+                    <!-- Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filtros
+                        </button>
+                        <ul class="dropdown-menu grande dropdown-menu-start" aria-labelledby="dropdownMenuButton">
+                            <li>
+                                <input id="filtronombre" type="text" class="form-control" placeholder="Nombre">
+                            </li>
+                            <li>
+                                <select  id="filtronivel"  class="form-select me-2" aria-label="Select">
+                                    <option selected>Nivel</option>
+                                </select>
+                            </li>
+                            <li>
+                                <select  id="filtroatributo" class="form-select me-2" aria-label="Select">
+                                    <option selected>Atributo</option>
+                                </select>
+                            </li>                         
+                            <li>
+                                <button id="btnfiltrar" onclick="filtrar()">Filtrar</button>
+                                <button id="btnfiltrar" onclick="quitarfiltro()">Borrar filtro</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="col" id="cartica" name ="cartica" style="display: none;">
             <div class="card">
                 <a class="enlace-digimon" href="Datos.html">
                     <img src="https://via.placeholder.com/200" class="card-img-top" alt="...">
@@ -35,25 +70,16 @@
                 </a>
             </div>
         </div>
-<div class="container margen">
-    <div class="row "  id="lista" class="lista">
-        <!-- Card 1 -->
-        
-    </div>
-
-</div>
-<div class="row botonera" >
-    <div class="col"><button onclick="pagAtras()">Anterior</button></div>
-    <div class="col"><h5 id="paginaactual" class="paginanumber"></ph5></div>
-    <div class="col"><button onclick="pagAdelante()">Siguiente</button></div>   
-</div>
-
-<script>
-$(document).ready(function(){
-    
-    $('#cabecera').load('Cabecera.html');
-});
-</script>
-</main>
+        <div class="container margen">
+            <div class="row"  id="lista" class="lista">
+                <!-- Card 1 -->
+            </div>
+        </div>
+        <div class="row botonera">
+            <div class="col"><button onclick="pagAtras()">Anterior</button></div>
+            <div class="col"><h5 id="paginaactual" class="paginanumber"></h5></div>
+            <div class="col"><button onclick="pagAdelante()">Siguiente</button></div>   
+        </div>
+    </main>
 </body>
 </html>

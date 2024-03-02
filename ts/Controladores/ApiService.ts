@@ -66,7 +66,7 @@ async function CargarDigimon(url:string) {
 
 // Función para cargar tipos de Digimon
 function CargarTipos(){
-    const url= "digi-api.com/api/v1/type";
+    const url= "https://digi-api.com/api/v1/type";
     const apiCaller = new ApiCaller(url);
 
     // Llamar al método fetchData
@@ -86,53 +86,83 @@ function CargarTipos(){
         });
 }
 
-// Función para cargar atributos de Digimon
-function CargarAtributo(){
-    const url= "digi-api.com/api/v1/attribute";
+async function CargartodosAtributos() {
+    localStorage.removeItem('filtroatributo');
+    let siguientepag: string | null = "https://digi-api.com/api/v1/attribute?page=0"; 
+    let listaatributo : Dato[]=[];
+
+    while (siguientepag !== null) {
+        siguientepag = await CargarAtributo(siguientepag,listaatributo);
+    }
+    
+        // Guardar el array de atributos en localStorage
+        localStorage.setItem('filtroatributo', JSON.stringify(listaatributo));
+
+}
+
+
+async function CargarAtributo(url: string,listaatributo:Dato[]): Promise<string | null> {
     const apiCaller = new ApiCaller(url);
 
-    // Llamar al método fetchData
-    apiCaller.fetchData()
-        .then((data: any) => {
-            const listaatributos = [];
-            for (const item of data.content.fields) {
-                let dato = new Dato(item.id, item.name);
-                listaatributos.push(dato);
-            }
-            // Guardar el array de atributos en localStorage
-            localStorage.setItem('listaatributos', JSON.stringify(listaatributos));
-        })
-        .catch((error: any) => {
-            // Manejar el error si la llamada falla
-            console.error('Error occurred:', error);
-        });
+    try {
+        const data: any = await apiCaller.fetchData();
+        console.log(data);
+
+        for (const item of data.content.fields) {
+            let dato = new Dato(item.id, item.name);
+            listaatributo.push(dato);
+        }
+
+        // Retornar el valor de nextPage si existe, de lo contrario, retorna null
+        return data.pageable.nextPage || null;
+    } catch (error) {
+        // Manejar el error si la llamada falla
+        console.error('Error occurred:', error);
+        // Retornar null en caso de error
+        return null;
+    }
+}
+async function Cargartodoslevels() {
+    localStorage.removeItem('filtronivel');
+    let listalevels : Dato[]=[];
+    let siguientepag: string | null = "https://digi-api.com/api/v1/level?page=0"; 
+
+    while (siguientepag !== null) {
+        siguientepag = await CargarLevels(siguientepag,listalevels);
+    }
+            // Guardar el array de niveles en localStorage
+    localStorage.setItem('filtronivel', JSON.stringify(listalevels));
+
 }
 
 // Función para cargar niveles de Digimon
-function CargarLevels(){
-    const url= "digi-api.com/api/v1/level";
+async function CargarLevels(url: string,listalevels:Dato[]): Promise<string | null> {
     const apiCaller = new ApiCaller(url);
 
-    // Llamar al método fetchData
-    apiCaller.fetchData()
-        .then((data: any) => {
-            const listalevels = [];
-            for (const item of data.content.fields) {
-                let dato = new Dato(item.id, item.name);
-                listalevels.push(dato);
-            }
-            // Guardar el array de niveles en localStorage
-            localStorage.setItem('listalevels', JSON.stringify(listalevels));
-        })
-        .catch((error: any) => {
-            // Manejar el error si la llamada falla
-            console.error('Error occurred:', error);
-        });
+    try {
+        const data: any = await apiCaller.fetchData();
+console.log(data);
+        
+        for (const item of data.content.fields) {
+            let dato = new Dato(item.id, item.name);
+            listalevels.push(dato);
+            
+        }
+
+
+        // Retornar el valor de nextPage si existe, de lo contrario, retorna null
+        return data.pageable.nextPage || null;
+    } catch (error) {
+        // Manejar el error si la llamada falla
+        console.error('Error occurred:', error);
+        // Retornar null en caso de error
+        return null;
+    }
 }
 
 // Función para cargar campos de Digimon
 function CargarFields(){
-    const url= "digi-api.com/api/v1/level"; // Esta URL parece ser incorrecta, debería ser para los campos de Digimon
+    const url= "https://digi-api.com/api/v1/level"; // Esta URL parece ser incorrecta, debería ser para los campos de Digimon
     const apiCaller = new ApiCaller(url);
 
     // Llamar al método fetchData

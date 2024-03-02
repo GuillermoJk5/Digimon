@@ -1,43 +1,31 @@
 
 
 document.addEventListener('DOMContentLoaded', function() {
-rellenarSelect("filtronivel");
-rellenarSelect("filtroatributo");
-rellenarSelect("filtrotipo");
-rellenarSelect("filtrohabitat");
+CargarSelects();
+
+// rellenarSelect("filtrotipo");
+// rellenarSelect("filtrohabitat");
 
 });
 
-function rellenarSelect(select: string) {
-    const levels = $(select);
-    let nombrelista="";
+async function CargarSelects() {
+   await  Cargartodoslevels();
+   await CargartodosAtributos();
+  rellenarSelect("filtronivel");
+ rellenarSelect("filtroatributo");
+}
 
-    switch (select) {
-        case "filtronivel":
-            nombrelista="listalevels";
-            console.log("nivel");
-            break;
-                case "filtroatributo":
-                    nombrelista="listaatributos";
-                    break;
-                    case "filtrohabitat":
-                        nombrelista="listafields";
-                        break;
-                        case "filtrotipo":
-                            nombrelista="listatipos";
-                            break;
-    
-        default:
-            break;
-    } 
-    let lista = JSON.parse(localStorage.getItem(nombrelista) || '[]');
-    
+ function rellenarSelect(nombre:string){
+    const select = $(nombre);
+    let lista = JSON.parse(localStorage.getItem(nombre) || '[]');
+    console.log(lista);
     lista.forEach((element : Dato) => {
         console.log(element.name);
-        levels.append('<option value="' + element.id + '">' + element.name + '</option>');
+        const option = $('<option></option>').attr('value', element.id).text(element.name);
+        select.append(option);
     });
-   
 }
+
 
 function quitarfiltro(){
     localStorage.removeItem('filtros');
