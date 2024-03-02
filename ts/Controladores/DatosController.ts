@@ -47,11 +47,11 @@ function pintarDatos(digimon: Digimon) {
   contenedor.find('#imagen').attr('src', digimon.imagen); 
   // Cambiar el texto del nivel del Digimon
   const levels = digimon.level.join('/');
-  contenedor.find('#level').text("Etapa Evolutiva: "+levels); 
+  contenedor.find('#level').text(levels); 
   // Cambiar el texto del atributo del Digimon
   const atributes = digimon.attribute.join('/');
-  contenedor.find('#atributo').text("Atributo: "+atributes); 
-  contenedor.find('#tipo').text("Tipo: "+digimon.type); 
+  contenedor.find('#atributo').text(atributes); 
+  contenedor.find('#tipo').text(digimon.type); 
 
   // Pintar los campos del Digimon
   const fieldrow=contenedor.find("#fieldsrow");

@@ -32,32 +32,44 @@
             <img id="imagen" src="" class="img-fluid mt-4" alt="Imagen">
           </div>
         </div>
-        <div class="row destacar">
+        <div class="row ">
+           
             <div class="col">
-                <p id="level">Sin Datos</p>
-            </div>
-            <div class="col">
-                <p id="atributo">Sin Datos</p>
-            </div>
-            <div class="col">
-                <p id="tipo">Sin Datos</p>
+                <p id="descripcion"></p>
             </div>
         </div>
-        <div class="row" id="fieldsrow">
-            <p>Fields</p>
+        <div class="row margen">
+            <div class="col">
+                <div class="row">
+                    <h2 class="dato">Data</h2>
+                    <div class="col">
+                        <h5>Evolutionary Stage</h5>
+                        <p id="level">Sin Datos</p>
+                    </div>
+                    <div class="col">
+                        <h5>Attribute</h5>
+                        <p id="atributo">Sin Datos</p>
+                    </div>
+                    <div class="col">
+                        <h5>Type</h5>
+                        <p id="tipo">Sin Datos</p>
+                    </div>
+                </div>
+           
+        
+        <div class="row margen" id="fieldsrow">
+            <h5>Fields</h5>
             <div class="col" id="fields" style="display: none;">
                 <img id="fieldimg">
                 <p id="fieldtext"></p>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <p id="descripcion"></p>
-            </div>
+         </div>
         </div>
         
+        
         <div class="row habilidades">
-            <h2>Habilidades</h2>
+            <h2>Skills</h2>
             <div class="col" id="listaskill">
                 <div class="row tabla" id="skill" style="display: none;">
                     <div class="col habilidadnombre"><h4 id="skillname"></h4></div>
@@ -67,8 +79,8 @@
         </div>
         <div class="row">
             <div class="col" id="prelista" >
-                <h2>Pre-Evoluciones</h2>
-                <div class="row" id="pre" style="display: none;"onclick="cambiardigimon('0')">
+                <h2>Pre-Evolutions</h2>
+                <div class="row listaevos" id="pre" style="display: none;"onclick="cambiardigimon('0')">
                     <div class="col"><img id="preimg" src="" alt="" class="imglista"></div>
                     <div class="col nombevos"><h3 id="prenombre"></h3><br>
                     
@@ -78,8 +90,8 @@
             </div>
             
             <div class="col" id="nextlista" >
-                <h2 >Post-Evoluciones</h2>
-                <div class="row" id="next" style="display: none;"onclick="cambiardigimon('0')">
+                <h2 >Post-Evolutions</h2>
+                <div class="row listaevos" id="next" style="display: none;"onclick="cambiardigimon('0')">
                     <div class="col">
                         <img id="nextimg" src="" alt="" class="imglista"></div>
                     <div class="col nombevos">

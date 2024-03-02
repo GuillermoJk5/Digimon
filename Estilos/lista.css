@@ -19,5 +19,24 @@ a {
 }
 .botonera{
   display: flex;
+  align-items: center;
   flex-direction: row;
+  text-align: center;
+  margin-top: 20px;
+  background-color: #078CDB; 
+  color: #FE8014; 
+  font-weight: bold;
+  padding: 20px;
+}
+.paginanumber{
+
+font-size: 30px;
+
+
+}
+
+main button{
+  padding: 20px;
+  background-color: #FE8014;
+  width: 170px;
 }

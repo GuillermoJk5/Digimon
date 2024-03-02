@@ -24,6 +24,7 @@
 <body>
 
 <header id="cabecera"></header>
+<main>
 <div class="col" id="cartica" name ="cartica" style="display: none;">
             <div class="card">
                 <a class="enlace-digimon" href="Datos.html">
@@ -39,13 +40,13 @@
         <!-- Card 1 -->
         
     </div>
+
+</div>
 <div class="row botonera" >
     <div class="col"><button onclick="pagAtras()">Anterior</button></div>
-    <div class="col"><p id="paginaactual"></p></div>
+    <div class="col"><h5 id="paginaactual" class="paginanumber"></ph5></div>
     <div class="col"><button onclick="pagAdelante()">Siguiente</button></div>   
 </div>
-</div>
-
 
 <script>
 $(document).ready(function(){
@@ -53,5 +54,6 @@ $(document).ready(function(){
     $('#cabecera').load('Cabecera.html');
 });
 </script>
+</main>
 </body>
 </html>
