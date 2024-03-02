@@ -1,15 +1,14 @@
 /* Estilos para el header */
 .margen{
-  margin-top: 40px;
+  margin-top: 20px;
 }
   
 .card{
   width: 200px;
 }
 
-img{
-  /* height: 320px;
-  width: 320px; */
+main img{
+  height: 198px;
 }
 
 a {
@@ -33,6 +32,12 @@ a {
 font-size: 30px;
 
 
+}
+
+.margenes{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 main button{
