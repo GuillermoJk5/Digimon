@@ -16,7 +16,7 @@ async function CargarSelects() {
 }
 
  function rellenarSelect(nombre:string){
-    const select = $(nombre);
+    const select = $("#"+nombre);
     let lista = JSON.parse(localStorage.getItem(nombre) || '[]');
     console.log(lista);
     lista.forEach((element : Dato) => {
