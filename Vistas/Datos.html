@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DigiVice</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../Estilos/cabecera.css">
     <link rel="stylesheet" href="../Estilos/datos.css">
-    
 </head>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../js/Modelos/Skill.js"></script>
 <script src="../js/Modelos/Card.js"></script>
@@ -22,18 +20,33 @@
 <script src="../js/Controladores/ApiService.js"></script>
 <script src="../js/Controladores/CabeceraController.js"></script>
 <script src="../js/Controladores/DatosController.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script><header id="cabecera"></header>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+   function volver() {
+    window.history.back();
+}
+</script>
 <body id="body">
-    
+    <header>
+        <div class="row">
+            
+            <div class="col">
+               <img src="../Img/digimon.png" alt="Digimon-logo">
+            </div>
+            <div class="col habilidadnombre">
+                <button onclick="volver()" class="btn btn-secondary">Volver</button>
+            </div>
+        </div>
+    </header>
+    <main>
     <div class="container" id="contenedor" style="display: none;">
         <div class="row justify-content-center">
-          <div class="col-md-6 text-center">
-            <h1 id="nombre">Sin Datos</h1>
-            <img id="imagen" src="" class="img-fluid mt-4" alt="Imagen">
-          </div>
+            <div class="col-md-6 text-center">
+                <h1 id="nombre">Sin Datos</h1>
+                <img id="imagen" src="" class="img-fluid mt-4" alt="Imagen">
+            </div>
         </div>
         <div class="row ">
-           
             <div class="col">
                 <p id="descripcion"></p>
             </div>
@@ -55,8 +68,8 @@
                         <p id="tipo">Sin Datos</p>
                     </div>
                 </div>
-           
-        
+            </div>
+        </div>
         <div class="row margen" id="fieldsrow">
             <h5>Fields</h5>
             <div class="col" id="fields" style="display: none;">
@@ -64,10 +77,6 @@
                 <p id="fieldtext"></p>
             </div>
         </div>
-         </div>
-        </div>
-        
-        
         <div class="row habilidades">
             <h2>Skills</h2>
             <div class="col" id="listaskill">
@@ -80,42 +89,20 @@
         <div class="row">
             <div class="col" id="prelista" >
                 <h2>Pre-Evolutions</h2>
-                <div class="row listaevos" id="pre" style="display: none;"onclick="cambiardigimon('0')">
+                <div class="row listaevos" id="pre" style="display: none;" onclick="cambiardigimon('0')">
                     <div class="col"><img id="preimg" src="" alt="" class="imglista"></div>
-                    <div class="col nombevos"><h3 id="prenombre"></h3><br>
-                    
-                    <!-- <p id="precondicion"></p> -->
-                    </div>
+                    <div class="col nombevos"><h3 id="prenombre"></h3><br></div>
                 </div>
             </div>
-            
             <div class="col" id="nextlista" >
-                <h2 >Post-Evolutions</h2>
-                <div class="row listaevos" id="next" style="display: none;"onclick="cambiardigimon('0')">
-                    <div class="col">
-                        <img id="nextimg" src="" alt="" class="imglista"></div>
-                    <div class="col nombevos">
-                        <h3 id="nextnombre"></h3><br>
-                    <!-- <p id="nextcondicion"></p> -->
-                </div>
-                    
+                <h2>Post-Evolutions</h2>
+                <div class="row listaevos" id="next" style="display: none;" onclick="cambiardigimon('0')">
+                    <div class="col"><img id="nextimg" src="" alt="" class="imglista"></div>
+                    <div class="col nombevos"><h3 id="nextnombre"></h3><br></div>
                 </div>
             </div>
         </div>
-      </div>
+    </div>
+</main>
 </body>
-
-<script>
-
-
-$(document).ready(function(){
-    
-    $('#cabecera').load('Cabecera.html');
-});
-
-
-
-</script>
-
-
 </html>
