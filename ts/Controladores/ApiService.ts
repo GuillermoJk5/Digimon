@@ -1,8 +1,5 @@
 // Función para cargar los Digimon
-async function CargarDigimon(url:string) {
-    console.log(url);
-    // let apiUrl = `https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=${pagina}`;
-    
+async function CargarDigimon(url:string) {    
     // Obtener filtros del localStorage
     const filtros = JSON.parse(localStorage.getItem('filtros') || '[]');
 
@@ -11,18 +8,12 @@ async function CargarDigimon(url:string) {
     //     if(filtros.nombre!== undefined){
     //         apiUrl = apiUrl + "&name="+filtros.nombre;
     //     }
-    //     if(filtros.tipo!==undefined){
-    //         apiUrl = apiUrl + "&type="+filtros.tipo;
-    //     }
     //     if(filtros.atributo!==undefined){
     //         apiUrl = apiUrl + "&attribute="+filtros.atributo;
     //     }
     //     if(filtros.nivel!==undefined){
     //         apiUrl = apiUrl + "&level="+filtros.nivel;
-    //     }
-    //     if(filtros.habitat!==undefined){
-    //         apiUrl = apiUrl + "&field="+filtros.habitat;
-    //     }
+    //     } 
     // }
 
     // Crear una instancia de ApiCaller
@@ -64,28 +55,6 @@ async function CargarDigimon(url:string) {
            
 }
 
-// Función para cargar tipos de Digimon
-function CargarTipos(){
-    const url= "https://digi-api.com/api/v1/type";
-    const apiCaller = new ApiCaller(url);
-
-    // Llamar al método fetchData
-    apiCaller.fetchData()
-        .then((data: any) => {
-            const listatipos = [];
-            for (const item of data.content.fields) {
-                let dato = new Dato(item.id, item.name);
-                listatipos.push(dato);
-            }
-            // Guardar el array de tipos en localStorage
-            localStorage.setItem('listatipos', JSON.stringify(listatipos));
-        })
-        .catch((error: any) => {
-            // Manejar el error si la llamada falla
-            console.error('Error occurred:', error);
-        });
-}
-
 async function CargartodosAtributos() {
     localStorage.removeItem('filtroatributo');
     let siguientepag: string | null = "https://digi-api.com/api/v1/attribute?page=0"; 
@@ -99,7 +68,6 @@ async function CargartodosAtributos() {
         localStorage.setItem('filtroatributo', JSON.stringify(listaatributo));
 
 }
-
 
 async function CargarAtributo(url: string,listaatributo:Dato[]): Promise<string | null> {
     const apiCaller = new ApiCaller(url);
@@ -122,6 +90,7 @@ async function CargarAtributo(url: string,listaatributo:Dato[]): Promise<string 
         return null;
     }
 }
+
 async function Cargartodoslevels() {
     localStorage.removeItem('filtronivel');
     let listalevels : Dato[]=[];
@@ -160,24 +129,4 @@ console.log(data);
     }
 }
 
-// Función para cargar campos de Digimon
-function CargarFields(){
-    const url= "https://digi-api.com/api/v1/level"; // Esta URL parece ser incorrecta, debería ser para los campos de Digimon
-    const apiCaller = new ApiCaller(url);
 
-    // Llamar al método fetchData
-    apiCaller.fetchData()
-        .then((data: any) => {
-            const listafields = [];
-            for (const item of data.content.fields) {
-                let dato = new Dato(item.id, item.name);
-                listafields.push(dato);
-            }
-            // Guardar el array de campos en localStorage
-            localStorage.setItem('listafields', JSON.stringify(listafields));
-        })
-        .catch((error: any) => {
-            // Manejar el error si la llamada falla
-            console.error('Error occurred:', error);
-        });
-}
