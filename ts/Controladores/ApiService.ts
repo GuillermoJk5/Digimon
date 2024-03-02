@@ -2,20 +2,23 @@
 async function CargarDigimon(url:string) {    
     // Obtener filtros del localStorage
     const filtros = JSON.parse(localStorage.getItem('filtros') || '[]');
-
+    console.log(url);
     // Aplicar filtros si existen
-    // if(filtros!=="[]"&&filtros!==undefined){
-    //     if(filtros.nombre!== undefined){
-    //         apiUrl = apiUrl + "&name="+filtros.nombre;
-    //     }
-    //     if(filtros.atributo!==undefined){
-    //         apiUrl = apiUrl + "&attribute="+filtros.atributo;
-    //     }
-    //     if(filtros.nivel!==undefined){
-    //         apiUrl = apiUrl + "&level="+filtros.nivel;
-    //     } 
-    // }
-
+    if(filtros!=="[]"&&filtros.length!==0){
+        console.log(filtros);
+        if(filtros.nombre!== ""){
+            url = url + "&name="+filtros.nombre;
+        }
+        if(filtros.atributo!==""){
+            url = url + "&attribute="+filtros.atributo;
+        }
+        if(filtros.nivel!==""){
+            console.log(url);
+            url = url + "&level="+filtros.nivel;
+            console.log(url);
+        } 
+    }
+    console.log(url);
     // Crear una instancia de ApiCaller
     const apiCaller = new ApiCaller(url);
 
@@ -74,8 +77,7 @@ async function CargarAtributo(url: string,listaatributo:Dato[]): Promise<string 
 
     try {
         const data: any = await apiCaller.fetchData();
-        console.log(data);
-
+        
         for (const item of data.content.fields) {
             let dato = new Dato(item.id, item.name);
             listaatributo.push(dato);
@@ -110,7 +112,6 @@ async function CargarLevels(url: string,listalevels:Dato[]): Promise<string | nu
 
     try {
         const data: any = await apiCaller.fetchData();
-console.log(data);
         
         for (const item of data.content.fields) {
             let dato = new Dato(item.id, item.name);

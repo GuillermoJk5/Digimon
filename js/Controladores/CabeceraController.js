@@ -1,38 +1,37 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 document.addEventListener('DOMContentLoaded', function () {
-    // rellenarSelect("filtronivel");
-    // rellenarSelect("filtroatributo");
+    CargarSelects();
     // rellenarSelect("filtrotipo");
     // rellenarSelect("filtrohabitat");
 });
-function rellenarSelect(select) {
-    const levels = $(select);
-    let nombrelista = "";
-    switch (select) {
-        case "filtronivel":
-            nombrelista = "listalevels";
-            console.log("nivel");
-            break;
-        case "filtroatributo":
-            nombrelista = "listaatributos";
-            break;
-        case "filtrohabitat":
-            nombrelista = "listafields";
-            break;
-        case "filtrotipo":
-            nombrelista = "listatipos";
-            break;
-        default:
-            break;
-    }
-    let lista = JSON.parse(localStorage.getItem(nombrelista) || '[]');
+function CargarSelects() {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield Cargartodoslevels();
+        yield CargartodosAtributos();
+        rellenarSelect("filtronivel");
+        rellenarSelect("filtroatributo");
+    });
+}
+function rellenarSelect(nombre) {
+    const select = $("#" + nombre);
+    let lista = JSON.parse(localStorage.getItem(nombre) || '[]');
     lista.forEach((element) => {
-        console.log(element.name);
-        levels.append('<option value="' + element.id + '">' + element.name + '</option>');
+        const option = $('<option></option>').attr('value', element.name).text(element.name);
+        select.append(option);
     });
 }
 function quitarfiltro() {
     localStorage.removeItem('filtros');
+    actualizar();
 }
 function filtrar() {
     function obtenerValorComoString(valor) {
@@ -47,6 +46,13 @@ function filtrar() {
         atributo: atributo
     };
     localStorage.setItem('filtros', JSON.stringify(filtros));
-    CargarDigimon(0);
+    actualizar();
+}
+function actualizar() {
+    return __awaiter(this, void 0, void 0, function* () {
+        $('#lista').empty();
+        yield CargarDigimon("https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=0");
+        actualizarvista();
+    });
 }
 //# sourceMappingURL=CabeceraController.js.map

@@ -8,16 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// Espera a que se cargue el DOM antes de ejecutar la función cargarpagina
 document.addEventListener('DOMContentLoaded', function () {
     cargarpagina();
 });
+// Función para cargar la página
 function cargarpagina() {
-    var _a;
-    let pagina = (_a = localStorage.getItem('pagina')) !== null && _a !== void 0 ? _a : "0";
-    CargarDigimon(parseInt(pagina));
-    $('#paginaactual').text(pagina);
-    actualizarvista();
+    return __awaiter(this, void 0, void 0, function* () {
+        const paginajson = localStorage.getItem('pagina');
+        let pagina = paginajson ? JSON.parse(paginajson) : { currentpage: "https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=0" };
+        yield CargarDigimon(pagina.currentpage);
+        $('#paginaactual').text(pagina.currentpage);
+        actualizarvista();
+    });
 }
+// Función para pintar un digimon en la lista
 function pintarlista(digimon) {
     const listado = $("#lista");
     let copia = $("#cartica").clone(true, true);
@@ -27,44 +32,53 @@ function pintarlista(digimon) {
     copia.find('.enlace-digimon').attr('href', "Datos.html?id=" + digimon.id);
     copia.appendTo(listado).show();
 }
-function pagAtras() {
-    var _a;
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log("PATRAS");
-        let pagina = (_a = localStorage.getItem('pagina')) !== null && _a !== void 0 ? _a : "0";
-        let paginanumber = parseInt(pagina);
-        if (paginanumber > 0) {
-            paginanumber--;
-            localStorage.setItem('pagina', paginanumber.toString());
-        }
-        $('#lista').empty();
-        yield CargarDigimon(paginanumber);
-        $('#paginaactual').text(paginanumber.toString());
-        actualizarvista();
-    });
-}
+// Función para cargar la página siguiente
 function pagAdelante() {
-    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("PALANTE");
-        let pagina = (_a = localStorage.getItem('pagina')) !== null && _a !== void 0 ? _a : "0";
-        let paginanumber = parseInt(pagina);
-        if (paginanumber < 49) {
-            paginanumber++;
-            localStorage.setItem('pagina', paginanumber.toString());
+        let numpagina = 0;
+        let pagina = new Pagina("0", "0", "0", "0");
+        let paginajson = localStorage.getItem('pagina');
+        if (paginajson !== null) {
+            pagina = JSON.parse(paginajson);
+            if (pagina.nextpage == "") {
+                pagina.nextpage = "https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=" + pagina.currentpage;
+            }
+            else {
+                numpagina = parseInt(pagina.currentpage) + 1;
+            }
         }
         $('#lista').empty();
-        yield CargarDigimon(paginanumber);
-        $('#paginaactual').text(paginanumber.toString());
+        yield CargarDigimon(pagina.nextpage);
+        $('#paginaactual').text(numpagina);
         actualizarvista();
     });
 }
+// Función para cargar la página anterior
+function pagAtras() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let numpagina = 0;
+        let pagina = new Pagina("0", "0", "0", "0");
+        let paginajson = localStorage.getItem('pagina');
+        if (paginajson !== null) {
+            pagina = JSON.parse(paginajson);
+            if (pagina.previouspage == "") {
+                pagina.previouspage = "https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=" + pagina.currentpage;
+            }
+            else {
+                numpagina = parseInt(pagina.currentpage) - 1;
+            }
+        }
+        $('#lista').empty();
+        yield CargarDigimon(pagina.previouspage);
+        $('#paginaactual').text(numpagina);
+        actualizarvista();
+    });
+}
+// Función para actualizar la vista con los digimon almacenados en el localStorage
 function actualizarvista() {
-    let digimondcardslist = [];
     const digimoncardsString = localStorage.getItem('digimoncards');
-    if (digimoncardsString !== null) {
-        digimondcardslist = JSON.parse(digimoncardsString);
-        console.log(digimondcardslist);
+    if (digimoncardsString) {
+        const digimondcardslist = JSON.parse(digimoncardsString);
         digimondcardslist.forEach((digimon) => {
             pintarlista(digimon);
         });

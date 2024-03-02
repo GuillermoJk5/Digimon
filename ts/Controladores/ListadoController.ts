@@ -32,9 +32,9 @@ async function pagAdelante() {
     pagina = JSON.parse(paginajson);
     if (pagina.nextpage == "") {
       pagina.nextpage = "https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page="+pagina.currentpage;
-    }
-     numpagina = parseInt(pagina.currentpage) + 1;
-  }
+    }else{ numpagina = parseInt(pagina.currentpage) + 1;
+  }}
+    
 
   $('#lista').empty();
   await CargarDigimon(pagina.nextpage);
@@ -51,8 +51,8 @@ async function pagAtras() {
     pagina = JSON.parse(paginajson);
     if (pagina.previouspage == "") {
       pagina.previouspage = "https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page="+pagina.currentpage;
-    }
-      numpagina = parseInt(pagina.currentpage) - 1;
+    }else{ numpagina = parseInt(pagina.currentpage) - 1;}
+     
   }
  
   $('#lista').empty();

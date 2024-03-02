@@ -18,17 +18,16 @@ async function CargarSelects() {
  function rellenarSelect(nombre:string){
     const select = $("#"+nombre);
     let lista = JSON.parse(localStorage.getItem(nombre) || '[]');
-    console.log(lista);
     lista.forEach((element : Dato) => {
-        console.log(element.name);
-        const option = $('<option></option>').attr('value', element.id).text(element.name);
+        
+        const option = $('<option></option>').attr('value', element.name).text(element.name);
         select.append(option);
     });
 }
 
-
 function quitarfiltro(){
     localStorage.removeItem('filtros');
+    actualizar();
 }
 
 function filtrar(){
@@ -40,7 +39,6 @@ function filtrar(){
     let nombre = obtenerValorComoString($("#filtronombre").val());
     let nivel = obtenerValorComoString($("#filtronivel").val());
     let atributo = obtenerValorComoString($("#filtroatributo").val());
-   
 
    let filtros = {
         nombre : nombre,
@@ -50,6 +48,11 @@ function filtrar(){
 
     localStorage.setItem('filtros', JSON.stringify(filtros));
 
-    CargarDigimon("");
+  actualizar();
+}
 
+ async function actualizar(){ 
+    $('#lista').empty();
+    await CargarDigimon("https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=0");
+    actualizarvista();
 }
