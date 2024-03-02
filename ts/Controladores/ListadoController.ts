@@ -4,31 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Función para cargar la página
-function cargarpagina() {
-  // Obtiene el objeto 'pagina' almacenado en el localStorage
-  let paginajson = localStorage.getItem('pagina');
-  
-  // Declara las variables para almacenar la página actual y el objeto 'Pagina'
-  let pagina;
-  let paginaactual;
-  
-  // Comprueba si el objeto 'pagina' existe y no está vacío
-  if (paginajson !== "" && paginajson !== null) {
-    // Parsea el objeto 'pagina' desde JSON a objeto JavaScript
-    pagina = JSON.parse(paginajson);
-    paginaactual = pagina.currentpage;
-  } else {
-    // Si no hay ningún objeto 'pagina', asigna una URL por defecto
-    paginaactual = "https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=0";
-  }
-  
-  // Carga los digimon de la página actual
-  CargarDigimon(paginaactual);
-  
-  // Actualiza el texto del elemento con id 'paginaactual' con la URL de la página actual
-  $('#paginaactual').text(paginaactual);
-  
-  // Actualiza la vista
+async function cargarpagina() {
+  const paginajson = localStorage.getItem('pagina');
+  let pagina = paginajson ? JSON.parse(paginajson) : { currentpage: "https://digi-api.com/api/v1/digimon?pageSize=30&xAntibody=false&page=0" };
+  await CargarDigimon(pagina.currentpage);
+  $('#paginaactual').text(pagina.currentpage);
   actualizarvista();
 }
 
